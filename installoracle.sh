@@ -65,6 +65,7 @@ suites:
     run_list:
       - role[oracle_full_test]
       - role[oracle_createdb]
+      #- role[ora_cli_quickstart]      
     attributes:
 EOF
 
@@ -122,6 +123,32 @@ yaI5cndwAGvlqDEyrswU3WErekNA7aakWE0d4JjWns8aW05S4AckLXNa1VYgDDWD
 9OO7O6GpcPEVPPJDDKkFjKnbLFeblO9akn/ppY4EpoL5/Fhv9hjDlVIzcF744v2v
 t+sYV5CnsbwcpOcrFiGDjvDfHty8Zu+eoNZQlXKIYaQ=
 EOF4
+#
+# Oracle client components
+#
+mkdir -p $COOKBOOKDIR/roles
+tee $COOKBOOKDIR/roles/ora_cli_quickstart.rb >/dev/null <<EOF5
+    name "ora_cli_quickstart"
+    description "Role applied to Oracle Client quickstart test machines."
+    run_list 'recipe[echa-oracle::oracli]'
+    override_attributes :oracle => {:client => {:latest_patch => {:url => 'file://$VMORACLEBIN/11.2/p16619892_112030_Linux-x86-64.zip'}, :opatch_update_url => 'file://$VMORACLEBIN/11.2/p6880880_112000_Linux-x86-64.zip', :install_files => ['file://$VMORACLEBIN/11.2/p10404530_112030_Linux-x86-64_4of7.zip']}}
+EOF5
+
+# this is just a copy of the database databag.
+# with the same password, "oraclesecret"
+mkdir -p $COOKBOOKDIR/data_bags/oracli
+tee $COOKBOOKDIR/data_bags/oracli/foo.json >/dev/null <<EOF6
+{
+    "id":"foo",
+    "pw":{
+      "encrypted_data":"DBmrU40EVl9Z15rGIGwSnJ4IxCFieu+B0l7D3HAsdqU=\n",
+      "iv":"o3ipr3zynuSunRNBdG8RDA==\n",
+      "version":1,
+      "cipher":"aes-256-cbc"
+    }
+}
+EOF6
+
 
 kitchen list
 kitchen create $COOKBOOK-$OSnodots
