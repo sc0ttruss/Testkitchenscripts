@@ -8,8 +8,8 @@
 # and the default OS
 #
 COOKBOOKDIR=~/Source/Testkitchen/Oracle
-OS="centos-6.4"
-OSnodots="centos-64"
+OS="centos-6.5"
+OSnodots="centos-65"
 COOKBOOK="echa-oracle"
 # this is the location of the Oracle binaries
 # you will need an oracle account to obtain these
@@ -65,7 +65,7 @@ suites:
     run_list:
       - role[oracle_full_test]
       - role[oracle_createdb]
-      #- role[ora_cli_quickstart]      
+      - role[ora_cli_quickstart]      
     attributes:
 EOF
 
