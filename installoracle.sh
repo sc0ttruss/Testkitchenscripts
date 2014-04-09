@@ -10,7 +10,7 @@
 COOKBOOKDIR=~/Source/Testkitchen/Oracle
 OS="centos-6.5"
 OSnodots="centos-65"
-COOKBOOK="echa-oracle"
+COOKBOOK="oracle"
 # this is the location of the Oracle binaries
 # you will need an oracle account to obtain these
 #
@@ -29,9 +29,8 @@ cd $COOKBOOKDIR/cookbooks
 # download the oracle cookbook
 #
 #git clone https://github.com/edelight/chef-solo-search.git
-git clone https://github.com/echaeu/echa-oracle.git
+git clone https://github.com/aririikonen/oracle
 #git clone https://scottruss@bitbucket.org/dmoarir/echa-oracle-dev.git
-##mv echa-oracle-dev echa-oracle
 cd ..
 # create the config file for test kitchen
 #
@@ -78,7 +77,7 @@ mkdir -p $COOKBOOKDIR/roles
 tee $COOKBOOKDIR/roles/oracle_full_test.rb >/dev/null <<EOF1
 name "ora_quickstart"
   description "Role applied to Oracle quickstart test machines."
-  run_list 'recipe[echa-oracle]', 'recipe[echa-oracle::logrotate_alert_log]', 'recipe[echa-oracle::logrotate_listener]', 'recipe[echa-oracle::createdb]'
+  run_list 'recipe[oracle]', 'recipe[oracle::logrotate_alert_log]', 'recipe[oracle::logrotate_listener]', 'recipe[oracle::createdb]'
   override_attributes :oracle => {:rdbms => {:latest_patch => {:url => 'file://$VMORACLEBIN/11.2/p16619892_112030_Linux-x86-64.zip'}, :opatch_update_url => 'file://$VMORACLEBIN/11.2/p6880880_112000_Linux-x86-64.zip', :install_files => ['file://$VMORACLEBIN/11.2/p10404530_112030_Linux-x86-64_1of7.zip', 'file://$VMORACLEBIN/11.2/p10404530_112030_Linux-x86-64_2of7.zip','file://$VMORACLEBIN/11.2/p10404530_112030_Linux-x86-64_4of7.zip']}}
 EOF1
 
@@ -102,7 +101,7 @@ mkdir -p $COOKBOOKDIR/roles
 tee $COOKBOOKDIR/roles/oracle_createdb.rb >/dev/null <<EOF3
 name "ora_createdb"
   description "Role to create a db."
-  run_list 'recipe[echa-oracle::createdb]'
+  run_list 'recipe[oracle::createdb]'
   override_attributes :oracle => {:rdbms => {:dbs => {:FOO => false}}}
 EOF3
 
@@ -130,7 +129,7 @@ mkdir -p $COOKBOOKDIR/roles
 tee $COOKBOOKDIR/roles/ora_cli_quickstart.rb >/dev/null <<EOF5
     name "ora_cli_quickstart"
     description "Role applied to Oracle Client quickstart test machines."
-    run_list 'recipe[echa-oracle::oracli]'
+    run_list 'recipe[oracle::oracli]'
     override_attributes :oracle => {:client => {:latest_patch => {:url => 'file://$VMORACLEBIN/11.2/p16619892_112030_Linux-x86-64.zip'}, :opatch_update_url => 'file://$VMORACLEBIN/11.2/p6880880_112000_Linux-x86-64.zip', :install_files => ['file://$VMORACLEBIN/11.2/p10404530_112030_Linux-x86-64_4of7.zip']}}
 EOF5
 
