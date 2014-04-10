@@ -32,6 +32,19 @@ cd $COOKBOOKDIR/cookbooks
 git clone https://github.com/aririikonen/oracle
 #git clone https://scottruss@bitbucket.org/dmoarir/echa-oracle-dev.git
 cd ..
+#
+# check if running vmware_workstation or virtualbox,
+# virtualbox is assumed the default
+# 
+# Hint, set this variable on the command line before you 
+# run this script if you want vmware_workstation
+#
+if $VAGRANT_DEFAULT_PROVIDER=vmware_workstation
+then
+   CPUVAR=numvcpus    # name of cpu for vmware vagrant
+else
+   CPUVAR=cpus        # name of cpu for virtualbox
+fi
 # create the config file for test kitchen
 #
 tee $COOKBOOKDIR/.kitchen.yml >/dev/null <<EOF
@@ -48,7 +61,7 @@ driver_config:
   synced_folders: [  [ "$ORACLEBIN","$VMORACLEBIN", "create: false, disabled: false" ] ]
   customize:
     memory: 4048
-    numvcpus: 2
+    $CPUVAR: 2
 
 provisioner:
   name: chef_solo
