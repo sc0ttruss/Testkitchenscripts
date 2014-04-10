@@ -30,7 +30,6 @@ cd $COOKBOOKDIR/cookbooks
 #
 #git clone https://github.com/edelight/chef-solo-search.git
 git clone https://github.com/aririikonen/oracle
-#git clone https://scottruss@bitbucket.org/dmoarir/echa-oracle-dev.git
 cd ..
 #
 # check if running vmware_workstation or virtualbox,
