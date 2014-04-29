@@ -14,7 +14,7 @@ COOKBOOK="oracle"
 # this is the location of the Oracle binaries
 # you will need an oracle account to obtain these
 #
-ORACLEBIN=/home/$USER/Source/Chef/Oraclebin
+ORACLEBIN=$HOME/Source/Chef/Oraclebin
 #  Location of the Oracle binaries inside the virtual machine
 #
 VMORACLEBIN=/opt/applications/chef/Oraclebin
