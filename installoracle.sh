@@ -54,8 +54,7 @@ tee $COOKBOOKDIR/.kitchen.yml >/dev/null <<EOF
 driver:
   name: vagrant
 
-# replace "$USER" with your own username/id 
-
+  
 driver_config:
   synced_folders: [  [ "$ORACLEBIN","$VMORACLEBIN", "create: false, disabled: false" ] ]
   customize:
