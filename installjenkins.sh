@@ -7,7 +7,7 @@
 # setup the default locations for the install
 # and the default OS
 #
-COOKBOOKDIR=~/Source/Testkitchen/Jenkins
+COOKBOOKDIR=$HOME/Source/Testkitchen/Jenkins
 OS="centos-6.5"
 OSnodots="centos-65"
 COOKBOOK="jenkins"
@@ -34,11 +34,7 @@ tee $COOKBOOKDIR/.kitchen.yml >/dev/null <<EOF
 driver:
   name: vagrant
 
-# replace "$HOME" with another location if you
-# want to have it in a different base directory 
-
 driver_config:
-  #synced_folders: [  [ "/$HOME/Source/Chef/Oraclebin","/opt/applications/chef/Oraclebin", "create: false, disabled: false" ] ]
   customize:
     memory: 4048
     numvcpus: 2
@@ -51,15 +47,9 @@ platforms:
 
 suites:
   - name: $COOKBOOK
-    data_bag_path: "/home/$USER/Source/Testkitchen/Oracle/data_bags"
-    role_path: "/home/$USER/Source/Testkitchen/Oracle/roles"
-    encrypted_data_bag_secret_key_path: "/home/$USER/.gnupg/password.txt"
     run_list:
       - recipe[java::oracle]
       - recipe[jenkins::master]
-      #- role[oracle_full_test]
-      #- role[oracle_createdb]
-    #attributes:
     attributes:
       java:
         oracle:

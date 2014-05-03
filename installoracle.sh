@@ -7,7 +7,7 @@
 # setup the default locations for the install
 # and the default OS
 #
-COOKBOOKDIR=~/Source/Testkitchen/Oracle
+COOKBOOKDIR=/$HOME/Source/Testkitchen/Oracle
 OS="centos-6.5"
 OSnodots="centos-65"
 COOKBOOK="oracle"
@@ -54,7 +54,7 @@ tee $COOKBOOKDIR/.kitchen.yml >/dev/null <<EOF
 driver:
   name: vagrant
 
-  
+
 driver_config:
   synced_folders: [  [ "$ORACLEBIN","$VMORACLEBIN", "create: false, disabled: false" ] ]
   customize:
