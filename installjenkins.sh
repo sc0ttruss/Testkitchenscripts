@@ -1,3 +1,12 @@
+#/bin/bash
+################################
+#
+#   Install Jenkins using Testkitchen
+#
+################################
+# setup the default locations for the install
+# and the default OS
+#
 COOKBOOKDIR=~/Source/Testkitchen/Jenkins
 OS="centos-6.5"
 OSnodots="centos-65"
