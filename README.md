@@ -12,7 +12,7 @@ Roadmap
 
 Intial install of basic scripts to get basic toolchain
 
-Configuration of basic scripts to tie them together as a "toolchain envorinment" using chef-metal/kitchen-metal
+Configuration of basic scripts to tie them together as a "toolchain environment" using chef-metal/kitchen-metal
 
 Build of multiple environments using the above "toolchain environment"
 
