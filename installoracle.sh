@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 ################################
 #
 #   Install Oracle using Testkitchen
@@ -7,9 +7,9 @@
 # setup the default locations for the install
 # and the default OS
 #
-COOKBOOKDIR=/$HOME/Source/Testkitchen/Oracle
+COOKBOOKDIR=$HOME/Source/Testkitchen/Oracle
 OS="centos-6.5"
-OSnodots="centos-65"
+OSNODOTS=${OS//\./} # replace the "dot" in the "OS" variable
 COOKBOOK="oracle"
 # this is the location of the Oracle binaries
 # you will need an oracle account to obtain these
@@ -21,7 +21,7 @@ VMORACLEBIN=/opt/applications/chef/Oraclebin
 # destroy old instances that were lying around
 #
 cd $COOKBOOKDIR
-kitchen destroy $COOKBOOK-$OSnodots
+kitchen destroy $COOKBOOK-$OSNODOTS
 cd -
 rm -Rf $COOKBOOKDIR
 mkdir -p $COOKBOOKDIR/cookbooks
@@ -38,12 +38,19 @@ cd ..
 # Hint, set this variable on the command line before you 
 # run this script if you want vmware_workstation
 #
-if $VAGRANT_DEFAULT_PROVIDER=vmware_workstation
-then
-   CPUVAR=numvcpus    # name of cpu for vmware vagrant
-else
-   CPUVAR=cpus        # name of cpu for virtualbox
-fi
+case $VAGRANT_DEFAULT_PROVIDER in
+  vmware_workstation|vmware_fusion)
+    CPUVAR=numvcpus    # name of cpu for vmware vagrant
+    ;;
+  virtualbox)
+    CPUVAR=cpus        # name of cpu for virtualbox vagrant
+    ;;
+  *)
+    CPUVAR=cpus        # name of cpu for virtualbox, default value
+    VAGRANT_DEFAULT_PROVIDER=virtualbox # default to virtualbox if environment variable not set.
+    echo "VAGRANT_DEFAULT_PROVIDER, not set, setting to virtualbox as default, for this script"
+    ;;
+esac
 # create the config file for test kitchen
 #
 tee $COOKBOOKDIR/.kitchen.yml >/dev/null <<EOF
@@ -161,8 +168,8 @@ EOF6
 
 
 kitchen list
-kitchen create $COOKBOOK-$OSnodots
-kitchen converge $COOKBOOK-$OSnodots
+kitchen create $COOKBOOK-$OSNODOTS
+kitchen converge $COOKBOOK-$OSNODOTS
 
 
 
