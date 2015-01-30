@@ -108,6 +108,13 @@ yaI5cndwAGvlqDEyrswU3WErekNA7aakWE0d4JjWns8aW05S4AckLXNa1VYgDDWD
 t+sYV5CnsbwcpOcrFiGDjvDfHty8Zu+eoNZQlXKIYaQ=
 EOF4
 
+#
+#source "https://supermarket.getchef.com"
+#metadata
+#
+
+# need to cd to cookbook/chefclient and then run berks vendor ../
+
 cd $COOKBOOKDIR
 
 kitchen list
