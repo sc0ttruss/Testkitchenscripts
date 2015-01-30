@@ -104,7 +104,9 @@ suites:
         version: '2.11.1-01'
         external_version: '2.11.1'
         checksum: 'f3c2aee1aa4bf6232b22393c1c9c1da3dfacb9ccca7ee58c85507c85748b1e67'
-
+        cli:
+          ssl:
+            verify: false
 EOF
 
 
