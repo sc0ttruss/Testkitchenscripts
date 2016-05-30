@@ -7,7 +7,7 @@
 # setup the default locations for the install
 # and the default OS
 #
-COOKBOOKDIR=$HOME/Vm/Source/Demos/Wip/Westpac/Delivery
+COOKBOOKDIR=$HOME/Source/Demos/Wip/Westpac/Delivery
 # destroy old instances that were lying around
 cd $COOKBOOKDIR/delivery_chef
 echo "now in delivery_chef directory"
@@ -22,42 +22,41 @@ cd $COOKBOOKDIR/delivery_push_jobs
 kitchen destroy
 cd ../../
 ## rm -Rf $COOKBOOKDIR
-## mkdir -p $COOKBOOKDIR
-## cd $COOKBOOKDIR
+mkdir -p $COOKBOOKDIR
+cd $COOKBOOKDIR
 ## mkdir -p  ~/chef-kits/chef
-## cd  ~/chef-kits/chef
-## wget -N https://packages.chef.io/stable/el/6/opscode-push-jobs-server-1.1.6-1.x86_64.rpm --no-check-certificate
-## wget -N https://packages.chef.io/stable/el/7/opscode-analytics-1.4.0-1.el7.x86_64.rpm --no-check-certificate
-## wget -N https://packages.chef.io/stable/el/7/opscode-reporting-1.6.0-1.el7.x86_64.rpm --no-check-certificate
-## wget -N https://packages.chef.io/stable/el/7/chef-server-core-12.6.0-1.el7.x86_64.rpm --no-check-certificate
-## wget -N https://packages.chef.io/stable/el/7/push-jobs-client-1.3.4-1.el7.x86_64.rpm --no-check-certificate
-## wget -N https://packages.chef.io/stable/el/7/delivery-cli-0.0.15-1.el6.x86_64.rpm --no-check-certificate
-## wget -N https://packages.chef.io/stable/el/6/opscode-push-jobs-server-1.1.6-1.x86_64.rpm --no-check-certificate
-## wget -N https://packages.chef.io/stable/el/7/chefdk-0.14.25-1.el7.x86_64.rpm --no-check-certificate
-## wget -N https://packages.chef.io/stable/el/7/delivery-0.4.299-1.el7.x86_64.rpm --no-check-certificate
-## wget -N https://packages.chef.io/stable/el/7/opscode-reporting-1.6.0-1.el7.x86_64.rpm --no-check-certificate
-## wget -N https://packages.chef.io/stable/el/7/chef-manage-2.3.0-1.el7.x86_64.rpm --no-check-certificate
-## wget -N https://packages.chef.io/stable/el/7/chef-server-core-12.6.0-1.el7.x86_64.rpm --no-check-certificate
-## wget -N https://packages.chef.io/stable/el/7/chef-12.10.24-1.el7.x86_64.rpm --no-check-certificate
-## wget -N https://packagecloud.io/imeyer/runit/packages/el/7/runit-2.1.2-3.el7.centos.x86_64.rpm/download --no-check-certificate
+cd  ~/chef-kits/chef
+wget -N https://packages.chef.io/stable/el/6/opscode-push-jobs-server-1.1.6-1.x86_64.rpm --no-check-certificate
+wget -N https://packages.chef.io/stable/el/7/opscode-analytics-1.4.0-1.el7.x86_64.rpm --no-check-certificate
+wget -N https://packages.chef.io/stable/el/7/opscode-reporting-1.6.0-1.el7.x86_64.rpm --no-check-certificate
+wget -N https://packages.chef.io/stable/el/7/chef-server-core-12.6.0-1.el7.x86_64.rpm --no-check-certificate
+wget -N https://packages.chef.io/stable/el/7/push-jobs-client-1.3.4-1.el7.x86_64.rpm --no-check-certificate
+wget -N https://packages.chef.io/stable/el/7/delivery-cli-0.0.15-1.el6.x86_64.rpm --no-check-certificate
+wget -N https://packages.chef.io/stable/el/6/opscode-push-jobs-server-1.1.6-1.x86_64.rpm --no-check-certificate
+wget -N https://packages.chef.io/stable/el/7/chefdk-0.14.25-1.el7.x86_64.rpm --no-check-certificate
+wget -N https://packages.chef.io/stable/el/7/delivery-0.4.299-1.el7.x86_64.rpm --no-check-certificate
+wget -N https://packages.chef.io/stable/el/7/opscode-reporting-1.6.0-1.el7.x86_64.rpm --no-check-certificate
+wget -N https://packages.chef.io/stable/el/7/chef-manage-2.3.0-1.el7.x86_64.rpm --no-check-certificate
+wget -N https://packages.chef.io/stable/el/7/chef-server-core-12.6.0-1.el7.x86_64.rpm --no-check-certificate
+wget -N https://packages.chef.io/stable/el/7/chef-12.10.24-1.el7.x86_64.rpm --no-check-certificate
+wget -N https://packagecloud.io/imeyer/runit/packages/el/7/runit-2.1.2-3.el7.centos.x86_64.rpm/download --no-check-certificate
 ## mv download runit-2.1.2-3.el7.centos.x86_64.rpm
-## cd $COOKBOOKDIR/
+cd $COOKBOOKDIR/
 ## # download all the delivery repositories
-## git clone https://github.com/sc0ttruss/delivery_push_jobs.git
-## git clone https://github.com/sc0ttruss/delivery_builder.git
-## git clone https://github.com/sc0ttruss/delivery_build.git
-## git clone https://github.com/sc0ttruss/delivery_server.git
-## git clone https://github.com/sc0ttruss/delivery_chef.git
-## git clone https://github.com/sc0ttruss/delivery_supermarket.git
-## git clone https://github.com/sc0ttruss/delivery_workstation.git
-## git clone https://github.com/sc0ttruss/push-jobs.git
-## git clone https://github.com/sc0ttruss/demo.git
-## git clone https://github.com/chef-cookbooks/pcb.git
-## git clone https://github.com/chef-cookbooks/delivery-truck
-## git clone https://github.com/chef-cookbooks/delivery-base
-## git clone https://github.com/chef-cookbooks/delivery_build
-## git clone https://github.com/chef-cookbooks/delivery-sugar
-#
+git clone https://github.com/sc0ttruss/delivery_push_jobs.git
+git clone https://github.com/sc0ttruss/delivery_builder.git
+git clone https://github.com/sc0ttruss/delivery_build.git
+git clone https://github.com/sc0ttruss/delivery_server.git
+git clone https://github.com/sc0ttruss/delivery_chef.git
+git clone https://github.com/sc0ttruss/delivery_supermarket.git
+git clone https://github.com/sc0ttruss/delivery_workstation.git
+git clone https://github.com/sc0ttruss/push-jobs.git
+git clone https://github.com/sc0ttruss/demo.git
+git clone https://github.com/chef-cookbooks/pcb.git
+git clone https://github.com/chef-cookbooks/delivery-truck
+git clone https://github.com/chef-cookbooks/delivery-base
+git clone https://github.com/chef-cookbooks/delivery_build
+git clone https://github.com/chef-cookbooks/delivery-sugar
 # check if running vmware_workstation or virtualbox,
 # virtualbox is assumed the default
 #
@@ -78,12 +77,12 @@ case $VAGRANT_DEFAULT_PROVIDER in
     ;;
 esac
 # echo `pwd`
-cd $COOKBOOKDIR/delivery_push_jobs
-kitchen list
-kitchen converge acceptance01 &
-kitchen converge union01 &
-kitchen converge rehearsal01 &
-kitchen converge delivered01 &
+## cd $COOKBOOKDIR/delivery_push_jobs
+## kitchen list
+## kitchen converge acceptance01 &
+## kitchen converge union01 &
+## kitchen converge rehearsal01 &
+## kitchen converge delivered01 &
 cd $COOKBOOKDIR/delivery_chef
 echo "now in delivery_chef directory"
 kitchen list
@@ -115,8 +114,26 @@ sleep 360000
 # Authorization Required, Authorize supermarket to use your Chef account?
 echo "Please confirm you have done the above, continue Y/N?"
 
+
+mkdir $COOKBOOKDIR/workspace
+#cp -Ra $COOKBOOKDIR/delivery_workstation/ ./  ( delete this line, probably )
+rsync -av --progress $COOKBOOKDIR/delivery_workstation/ $COOKBOOKDIR/workspace --exclude .git
+# add the chef server cert to the local trusted_certs directory
+knife ssl fetch https://chef.myorg.chefdemo.net
+knife ssl fetch https://supermarket.myorg.chefdemo.net
+# Let's check that was successfull
+knife ssl check https://chef.myorg.chefdemo.net
+knife ssl check https://supermarket.myorg.chefdemo.net
+# add the supermarket search to the local chefdk
+# note if you ugrade chefdk, this has to be upgraded too
+sudo bash -c "cat ./.chef/trusted_certs/*.crt >> /opt/chefdk/embedded/ssl/certs/cacert.pem"
+# upload the delivery_nodes emvironment
+knife upload environment ./environments/delivery_nodes.json
+
 #  Add the cookbooks to the local supermarket
 # server that you just built above
+# note you need to have added the certs to the local
+# workspace to make this successfull
 knife supermarket share -o $COOKBOOKDIR 'delivery_supermarket'
 knife supermarket share -o $COOKBOOKDIR 'delivery_server'
 knife supermarket share -o $COOKBOOKDIR 'delivery_build'
@@ -162,35 +179,30 @@ berks upload -b  $COOKBOOKDIR/delivery-base/Berksfile
 berks upload -b  $COOKBOOKDIR/delivery_build/Berksfile
 berks upload -b  $COOKBOOKDIR/delivery-sugar/Berksfile
 
-cd $COOKBOOKDIR/delivery_workstation
-# add the chef server cert to the local trusted_certs directory
-knife ssl fetch https://chef.myorg.chefdemo.net
-knife ssl fetch https://supermarket.myorg.chefdemo.net
-# Let's check that was successfull
-knife ssl check https://chef.myorg.chefdemo.net
-knife ssl check https://supermarket.myorg.chefdemo.net
-# add the supermarket search to the local chefdk
-# note if you ugrade chefdk, this has to be upgraded too
-sudo bash -c "cat ./.chef/trusted_certs/*.crt >> /opt/chefdk/embedded/ssl/certs/cacert.pem"
-# upload the delivery_nodes emvironment
-knife upload environment ./environments/delivery_nodes.json
 # bootsttap builder1 node ( note you might prefer x3 of these nodes )
 knife bootstrap builder1.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "builder1.myorg.chefdemo.net" -E "delivery_nodes" -r 'recipe[delivery_builder::default]'
-
 echo 'Manual step 2.'
 sleep 36000
 # Bootstrap the environment nodes
 # mote the acceptance environment has to exist for this bootstrap to work,
 # so do the following in delivery.
-# Login to the console, here https://delivery.myorg.chefdemo.net
-# create an organisation called 'demo', and a project, called 'demo'
-# https://delivery.myorg.chefdemo.net/e/myorg/#/organizations
+# Login to the console, as 'admin' user here https://delivery.myorg.chefdemo.net
+# password is in the ~/chef-kits/chef/passwords.txt file ( from chef server )
 # add your public key to the delivery user
 # create one with `ssh-keygen -t rsa -b 4096 -C delivery@myorg.chefdemo.net -V +1024w1d`
-# and select all the roles  admin, committer, reviewer, shipper, observer
 # next download the demo project from delviery and update it...from the dem directory above.
+# and select all the roles  admin, committer, reviewer, shipper, observer
+# logout and log back in again as delivery user
+# Login to the console, as 'delivery' user here https://delivery.myorg.chefdemo.net
+# password is in the ~/chef-kits/chef/deliverypassword.txt file ( from delivery server )
+# check out the diagram here https://www.lucidchart.com/documents/edit/0a0c86f4-abe9-47ba-8234-ba2db866023a
+# create an organisation called 'demo',
+##  and a project, called 'demo'??????? not sure this is required.  hold off.
+# https://delivery.myorg.chefdemo.net/e/myorg/#/organizations
 
-# accept the rsa key for identity of host
+# accept the rsa key for identity of host on the workstation
+ssh -l delivery@myorg -p 8989 delivery.myorg.chefdemo.net
+# think we have to run this twice, once to add, then once to connect
 ssh -l delivery@myorg -p 8989 delivery.myorg.chefdemo.net
 # output should be similar to the following:-
 # The authenticity of host '[delivery.myorg.chefdemo.net]:8989 ([192.168.56.46]:8989)' can't be established.
@@ -206,14 +218,14 @@ ssh -l delivery@myorg -p 8989 delivery.myorg.chefdemo.net
 # ref: https://docs.chef.io/install_delivery_ssh.html#install-delivery-cli
 # Ubuntu specific curl -L https://omnitruck.chef.io/install.sh | sudo bash -x -s -- -P delivery-cli
 # clone this project:
-delivery clone demo --ent=myorg --org=myorg --user=delivery --server=delivery.myorg.chefdemo.net
-cd demo
-# Create a project configuration file:
+
+mkdir $COOKBOOKDIR/workspace/demo
+cd $COOKBOOKDIR/workspace/demo
+git init .
 delivery setup --ent=myorg --org=myorg --user=delivery --server=delivery.myorg.chefdemo.net
-# Obtain a Delivery API token (you'll be prompted for your password here):
-vi readme
-git add .
-git commit -m "try2"
+echo "# demo " >> README.md
+git add README.md
+git commit -m "Initial commit"
 delivery token
 # note:  this is the password from your deliverypassword.txt file from
 # the deliery server
@@ -221,27 +233,65 @@ delivery token
 # you (with an empty set of phase recipes), add the cookbook to your project,
 # create the new pipeline and submit the project to Delivery for review:
 delivery init
+echo 'manual step 3, go work the pipeline in the browser, then come back here.'
+sleep 360000
+##  old way, no longer supported
+## delivery clone demo --ent=myorg --org=myorg --user=delivery --server=delivery.myorg.chefdemo.net
+## cd demo
+## # Create a project configuration file:
+## delivery setup --ent=myorg --org=myorg --user=delivery --server=delivery.myorg.chefdemo.net
+## # Obtain a Delivery API token (you'll be prompted for your password here):
+## vi readme
+## git add .
+## git commit -m "try2"
+## delivery token
+# note:  this is the password from your deliverypassword.txt file from
+# the deliery server
+# Run delivery init, which will create an empty build cookbook for
+# you (with an empty set of phase recipes), add the cookbook to your project,
+# create the new pipeline and submit the project to Delivery for review:
+##delivery init
 # copy in the demo cookbook downloaded above, everything except the .git directory
-git checkout -b firstry
-rsync -av --progress $COOKBOOKDIR/demo/ ../ --exclude .git
+
+echo "now let's add some environments to the pipeline "
+cd $COOKBOOKDIR/delivery_push_jobs
+kitchen list
+kitchen converge acceptance01 &
+kitchen converge union01 &
+kitchen converge rehearsal01 &
+kitchen converge delivered01 &
+# once a project has ran through once, do
+cd $COOKBOOKDIR/workspace/demo
 git pull --prune
+git checkout -b firstry
+rsync -av --progress $COOKBOOKDIR/demo/ $COOKBOOKDIR/workspace/demo --exclude .git
 git status
 git add .
 git status
-  git commit -m "first upload"
+git commit -m "first upload with environments with nodes"
 git status
-
-
-
+# OK, needs some work on how we delivery review it... and bootstrap
+delivery review
+echo 'manual step 3, cannot boot strap till we add the envs, hence why .'
+echo 'we did a delivery review above'
+sleep 36000
+# approve build in gui, then create the environments
+# functional will fail so we can bootstrap the node, now the env exists...
 # bootstrap the environment nodes
-knife bootstrap acceptance01.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "acceptance01.myorg.chefdemo.net" -E "acceptance-myorg-demo-demo-master" -r 'recipe[delivery_push_jobs::default],recipe['demo::default']'
-knife bootstrap union01.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "union01.myorg.chefdemo.net" -E "union" -r 'recipe[delivery_push_jobs::default],recipe['demo::default']'
-knife bootstrap rehearsal01.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "rehearsal01.myorg.chefdemo.net" -E "rehearsal" -r 'recipe[delivery_push_jobs::default],recipe['demo::default']'
-knife bootstrap delivered01.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "delivered01.myorg.chefdemo.net" -E "delivered" -r 'recipe[delivery_push_jobs::default],recipe['demo::default']'
+knife bootstrap acceptance01.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "acceptance01.myorg.chefdemo.net" -E "acceptance-myorg-myorg-demo-master" -r 'recipe[delivery_push_jobs::default],recipe[demo::default]'
+# now re-run the acceptance phase and see if functional passes
+# assuming acceptance passes, press the delivery button
+# this should fail, but tt will create all the environments,
+#  then we can Bootstrap the union node as union now exists
+knife bootstrap union01.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "union01.myorg.chefdemo.net" -E "union" -r 'recipe[delivery_push_jobs::default],recipe[demo::default]'
+# similarly for rehearsal01
+knife bootstrap rehearsal01.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "rehearsal01.myorg.chefdemo.net" -E "rehearsal" -r 'recipe[delivery_push_jobs::default],recipe[demo::default]'
+# similar for delivered
+knife bootstrap delivered01.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "delivered01.myorg.chefdemo.net" -E "delivered" -r 'recipe[delivery_push_jobs::default],recipe[demo::default]'
 
 # add a run_list
-Create the org and the project in delivery server.
+#Create the org and the project in delivery server.
 
 # upload the build and builder cookbooks to chef server
-knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery_build delivery_build
-knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery_builder delivery_builder
+#knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery_build delivery_build
+#knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery_builder delivery_builder
