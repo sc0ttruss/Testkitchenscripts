@@ -29,14 +29,13 @@ cd  ~/chef-kits/chef
 wget -N https://packages.chef.io/stable/el/6/opscode-push-jobs-server-1.1.6-1.x86_64.rpm --no-check-certificate
 wget -N https://packages.chef.io/stable/el/7/opscode-analytics-1.4.0-1.el7.x86_64.rpm --no-check-certificate
 wget -N https://packages.chef.io/stable/el/7/opscode-reporting-1.6.0-1.el7.x86_64.rpm --no-check-certificate
-wget -N https://packages.chef.io/stable/el/7/chef-server-core-12.6.0-1.el7.x86_64.rpm --no-check-certificate
+wget -N https://packages.chef.io/stable/el/7/chef-server-core-12.7.0-1.el7.x86_64.rpm --no-check-certificate
 wget -N https://packages.chef.io/stable/el/7/push-jobs-client-1.3.4-1.el7.x86_64.rpm --no-check-certificate
-wget -N https://packages.chef.io/stable/el/7/chefdk-0.14.25-1.el7.x86_64.rpm --no-check-certificate
-wget -N https://packages.chef.io/stable/el/7/delivery-0.4.299-1.el7.x86_64.rpm --no-check-certificate
+wget -N https://packages.chef.io/stable/el/7/chefdk-0.15.15-1.el7.x86_64.rpm --no-check-certificate
+wget -N https://packages.chef.io/stable/el/7/delivery-0.4.437-1.el7.x86_64.rpm --no-check-certificate
 wget -N https://packages.chef.io/stable/el/7/opscode-reporting-1.6.0-1.el7.x86_64.rpm --no-check-certificate
-wget -N https://packages.chef.io/stable/el/7/chef-manage-2.3.0-1.el7.x86_64.rpm --no-check-certificate
-wget -N https://packages.chef.io/stable/el/7/chef-server-core-12.6.0-1.el7.x86_64.rpm --no-check-certificate
-wget -N https://packages.chef.io/stable/el/7/chef-12.10.24-1.el7.x86_64.rpm --no-check-certificate
+wget -N https://packages.chef.io/stable/el/7/chef-manage-2.4.0-1.el7.x  86_64.rpm --no-check-certificate
+wget -N https://packages.chef.io/stable/el/7/chef-12.11.18-1.el7.x86_64.rpm --no-check-certificate
 wget -N https://packagecloud.io/imeyer/runit/packages/el/7/runit-2.1.2-3.el7.centos.x86_64.rpm/download --no-check-certificate
 ## mv download runit-2.1.2-3.el7.centos.x86_64.rpm
 cd $COOKBOOKDIR/
