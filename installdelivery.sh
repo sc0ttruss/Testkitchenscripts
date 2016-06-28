@@ -32,7 +32,7 @@ wget -N https://packages.chef.io/stable/el/7/opscode-reporting-1.6.0-1.el7.x86_6
 wget -N https://packages.chef.io/stable/el/7/chef-server-core-12.7.0-1.el7.x86_64.rpm --no-check-certificate
 wget -N https://packages.chef.io/stable/el/7/push-jobs-client-1.3.4-1.el7.x86_64.rpm --no-check-certificate
 wget -N https://packages.chef.io/stable/el/7/chefdk-0.15.15-1.el7.x86_64.rpm --no-check-certificate
-wget -N https://packages.chef.io/stable/el/7/delivery-0.4.437-1.el7.x86_64.rpm --no-check-certificate
+wget -N https://packages.chef.io/stable/el/7/delivery-0.4.522-1.el7.x86_64.rpm --no-check-certificate
 wget -N https://packages.chef.io/stable/el/7/opscode-reporting-1.6.0-1.el7.x86_64.rpm --no-check-certificate
 wget -N https://packages.chef.io/stable/el/7/chef-manage-2.4.0-1.el7.x  86_64.rpm --no-check-certificate
 wget -N https://packages.chef.io/stable/el/7/chef-12.11.18-1.el7.x86_64.rpm --no-check-certificate
