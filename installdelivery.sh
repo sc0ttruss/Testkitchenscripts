@@ -102,12 +102,12 @@ kitchen list
 kitchen converge
 kitchen list
 echo "Looks like we are complete, now go follow the manual instructions"
-echo "need to login to supermarket as delivery user,"
+echo "need to login to supermarket as srv-delivery user,"
 echo "and accept the app shareing with supermarket "
 # Manual step, need to stop here
 echo 'Manual step 1.'
 sleep 360000
-# Login to supermarket as chef user delivery, and press yes button
+# Login to supermarket as chef user srv-delivery, and press yes button
 # Authorization Required, Authorize supermarket to use your Chef account?
 echo "Please confirm you have done the above, continue Y/N?"
 
@@ -123,6 +123,8 @@ knife ssl check https://chef.myorg.chefdemo.net
 knife ssl check https://supermarket.myorg.chefdemo.net
 # add the supermarket search to the local chefdk
 # note if you ugrade chefdk, this has to be upgraded too
+echo 'you probably need root password to run the next command'
+ehco 'but dont worry the OS will prompt you'
 sudo bash -c "cat ./.chef/trusted_certs/*.crt >> /opt/chefdk/embedded/ssl/certs/cacert.pem"
 # upload the delivery_nodes emvironment
 knife upload environment ./environments/delivery_nodes.json
