@@ -113,6 +113,7 @@ echo "Please confirm you have done the above, continue Y/N?"
 
 
 mkdir $COOKBOOKDIR/workspace
+cd $COOKBOOKDIR/workspace
 #cp -Ra $COOKBOOKDIR/delivery_workstation/ ./  ( delete this line, probably )
 rsync -av --progress $COOKBOOKDIR/delivery_workstation/ $COOKBOOKDIR/workspace --exclude .git
 # add the chef server cert to the local trusted_certs directory
