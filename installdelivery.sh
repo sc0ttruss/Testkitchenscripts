@@ -196,8 +196,7 @@ sleep 36000
 # Login to the console, as 'delivery' user here https://delivery.myorg.chefdemo.net
 # password is in the ~/chef-kits/chef/deliverypassword.txt file ( from delivery server )
 # check out the diagram here https://www.lucidchart.com/documents/edit/0a0c86f4-abe9-47ba-8234-ba2db866023a
-# create an organisation called 'demo',
-##  and a project, called 'demo'??????? not sure this is required.  hold off.
+# create an organisation called 'myorg', but DO NOT create the project 'demo'
 # https://delivery.myorg.chefdemo.net/e/myorg/#/organizations
 
 # accept the rsa key for identity of host on the workstation
@@ -218,7 +217,7 @@ ssh -l srv-delivery@myorg -p 8989 delivery.myorg.chefdemo.net
 mkdir $COOKBOOKDIR/workspace/demo
 cd $COOKBOOKDIR/workspace/demo
 git init .
-delivery setup --ent=myorg --org=myorg --user=delivery --server=delivery.myorg.chefdemo.net
+delivery setup --ent=myorg --org=myorg --user=srv-delivery --server=delivery.myorg.chefdemo.net
 echo "# demo " >> README.md
 git add README.md
 git commit -m "Initial commit"
