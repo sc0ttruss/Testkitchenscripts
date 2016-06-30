@@ -201,9 +201,9 @@ sleep 36000
 # https://delivery.myorg.chefdemo.net/e/myorg/#/organizations
 
 # accept the rsa key for identity of host on the workstation
-ssh -l delivery@myorg -p 8989 delivery.myorg.chefdemo.net
+ssh -l srv-delivery@myorg -p 8989 delivery.myorg.chefdemo.net
 # think we have to run this twice, once to add, then once to connect
-ssh -l delivery@myorg -p 8989 delivery.myorg.chefdemo.net
+ssh -l srv-delivery@myorg -p 8989 delivery.myorg.chefdemo.net
 # output should be similar to the following:-
 # The authenticity of host '[delivery.myorg.chefdemo.net]:8989 ([192.168.56.46]:8989)' can't be established.
 # RSA key fingerprint is 64:b5:7e:df:dc:1e:45:80:b1:91:87:ad:f6:c3:db:99.
