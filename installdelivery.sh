@@ -125,7 +125,7 @@ knife ssl check https://supermarket.myorg.chefdemo.net
 # add the supermarket search to the local chefdk
 # note if you ugrade chefdk, this has to be upgraded too
 echo 'you probably need root password to run the next command'
-ehco 'but dont worry the OS will prompt you'
+echo 'but dont worry the OS will prompt you'
 sudo bash -c "cat ./.chef/trusted_certs/*.crt >> /opt/chefdk/embedded/ssl/certs/cacert.pem"
 # upload the delivery_nodes emvironment
 knife upload environment ./environments/delivery_nodes.json
