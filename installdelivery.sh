@@ -97,10 +97,11 @@ cd $COOKBOOKDIR/delivery_builder
 kitchen list
 kitchen converge
 kitchen list
-cd $COOKBOOKDIR/delivery_push_jobs
-kitchen list
-kitchen converge
-kitchen list
+# create the environment nodes at the end
+# cd $COOKBOOKDIR/delivery_push_jobs
+# kitchen list
+# kitchen converge
+# kitchen list
 echo "Looks like we are complete, now go follow the manual instructions"
 echo "need to login to supermarket as srv-delivery user,"
 echo "and accept the app shareing with supermarket "
@@ -268,7 +269,7 @@ git status
 # OK, needs some work on how we delivery review it... and bootstrap
 delivery review
 echo 'we did a delivery review above'
-echo 'if workers are idle try this debug on the delivery builder1 node'
+echo 'if workers are idle try this debug on the builder1 node'
 echo 'login as dbuild user and try this'
 echo 'knife job status'
 echo 'knife job start chef-client builder1.myorg.chefdemo.net'
