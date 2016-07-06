@@ -269,6 +269,11 @@ git status
 delivery review
 echo 'manual step 3, cannot boot strap till we add the envs, hence why .'
 echo 'we did a delivery review above'
+echo 'if workers are idle try this debug on the delivery builder1 node'
+echo 'login as dbuild user and try this'
+echo 'knife job status'
+echo 'knife job start chef-client builder1.myorg.chefdemo.net'
+echo 'should kick off chef-client on builder1 and be successful'
 sleep 36000
 # approve build in gui, then create the environments
 # functional will fail so we can bootstrap the node, now the env exists...
