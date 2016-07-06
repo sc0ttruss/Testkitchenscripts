@@ -278,6 +278,7 @@ echo 'nife node status, should return this....'
 echo 'builder1.myorg.chefdemo.net	available'
 echo 'manual step 3, cannot boot strap till we add the envs, hence why .'
 sleep 36000
+cd $COOKBOOKDIR/workspace/demo
 # approve build in gui, then create the environments
 # functional will fail so we can bootstrap the node, now the env exists...
 # bootstrap the environment nodes
