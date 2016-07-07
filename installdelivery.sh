@@ -128,12 +128,13 @@ knife ssl check https://supermarket.myorg.chefdemo.net
 echo 'you probably need root password to run the next command'
 echo 'but dont worry the OS will prompt you'
 sudo bash -c "cat ./.chef/trusted_certs/*.crt >> /opt/chefdk/embedded/ssl/certs/cacert.pem"
-# upload the delivery_nodes emvironment
+# upload the delivery_nodes emvironment, plus
+# union, rehearsal and delivered0
+# Acceptance will be created on first run by delivery
 knife upload environment ./environments/delivery_nodes.json
 knife upload environment ./environments/union.json
 knife upload environment ./environments/rehearsal.json
 knife upload environment ./environments/delivered.json
-
 #  Add the cookbooks to the local supermarket
 # server that you just built above
 # note you need to have added the certs to the local
