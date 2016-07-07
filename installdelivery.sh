@@ -130,6 +130,9 @@ echo 'but dont worry the OS will prompt you'
 sudo bash -c "cat ./.chef/trusted_certs/*.crt >> /opt/chefdk/embedded/ssl/certs/cacert.pem"
 # upload the delivery_nodes emvironment
 knife upload environment ./environments/delivery_nodes.json
+knife upload environment ./environments/union.json
+knife upload environment ./environments/rehearsal.json
+knife upload environment ./environments/delivered.json
 
 #  Add the cookbooks to the local supermarket
 # server that you just built above
