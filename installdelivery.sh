@@ -152,37 +152,61 @@ knife supermarket share -o $COOKBOOKDIR 'delivery-truck'
 knife supermarket share -o $COOKBOOKDIR 'delivery-base'
 knife supermarket share -o $COOKBOOKDIR 'delivery_build'
 knife supermarket share -o $COOKBOOKDIR 'delivery-sugar'
-# install all dependent cookbooks to chef server
-berks install -b  $COOKBOOKDIR/delivery_push_jobs/Berksfile
-berks install -b  $COOKBOOKDIR/delivery_chef/Berksfile
-berks install -b  $COOKBOOKDIR/delivery_supermarket/Berksfile
-berks install -b  $COOKBOOKDIR/delivery_server/Berksfile
-berks install -b  $COOKBOOKDIR/delivery_builder/Berksfile
-berks install -b  $COOKBOOKDIR/delivery_build/Berksfile
-berks install -b  $COOKBOOKDIR/delivery_push_jobs/Berksfile
-berks install -b  $COOKBOOKDIR/demo/Berksfile
-# there is no berksfile for this pcb.
-# berks install -b  $COOKBOOKDIR/pcb/Berksfile
-berks install -b  $COOKBOOKDIR/delivery-truck/Berksfile
-berks install -b  $COOKBOOKDIR/delivery-base/Berksfile
-berks install -b  $COOKBOOKDIR/delivery_build/Berksfile
-berks install -b  $COOKBOOKDIR/delivery-sugar/Berksfile
-# upload all cookbooks to chef server
-berks upload -b  $COOKBOOKDIR/delivery_push_jobs/Berksfile
-berks upload -b  $COOKBOOKDIR/delivery_chef/Berksfile
-berks upload -b  $COOKBOOKDIR/delivery_supermarket/Berksfile
-berks upload -b  $COOKBOOKDIR/delivery_server/Berksfile
-berks upload -b  $COOKBOOKDIR/delivery_builder/Berksfile
-berks upload -b  $COOKBOOKDIR/delivery_build/Berksfile
-berks upload -b  $COOKBOOKDIR/delivery_push_jobs/Berksfile
-berks upload -b  $COOKBOOKDIR/demo/Berksfile
-# berks upload -b  $COOKBOOKDIR/pcb/Berksfile
-# ok no berksfile so try this instead.
-knife cookbook upload --cookbook-path ../../Delivery pcb
-berks upload -b  $COOKBOOKDIR/delivery-truck/Berksfile
-berks upload -b  $COOKBOOKDIR/delivery-base/Berksfile
-berks upload -b  $COOKBOOKDIR/delivery_build/Berksfile
-berks upload -b  $COOKBOOKDIR/delivery-sugar/Berksfile
+# this secion commmented out as takes too many
+# boilerplate cookbooks that are not required for redhat
+# kept here as a reminder of what might be for other OS'S
+#  # install all dependent cookbooks to chef server
+#  berks install -b  $COOKBOOKDIR/delivery_push_jobs/Berksfile
+#  berks install -b  $COOKBOOKDIR/delivery_chef/Berksfile
+#  berks install -b  $COOKBOOKDIR/delivery_supermarket/Berksfile
+#  berks install -b  $COOKBOOKDIR/delivery_server/Berksfile
+#  berks install -b  $COOKBOOKDIR/delivery_builder/Berksfile
+#  berks install -b  $COOKBOOKDIR/delivery_build/Berksfile
+#  berks install -b  $COOKBOOKDIR/delivery_push_jobs/Berksfile
+#  berks install -b  $COOKBOOKDIR/demo/Berksfile
+#  # there is no berksfile for this pcb.
+#  # berks install -b  $COOKBOOKDIR/pcb/Berksfile
+#  berks install -b  $COOKBOOKDIR/delivery-truck/Berksfile
+#  berks install -b  $COOKBOOKDIR/delivery-base/Berksfile
+#  berks install -b  $COOKBOOKDIR/delivery_build/Berksfile
+#  berks install -b  $COOKBOOKDIR/delivery-sugar/Berksfile
+#  # upload all cookbooks to chef server
+#  berks upload -b  $COOKBOOKDIR/delivery_push_jobs/Berksfile
+#  berks upload -b  $COOKBOOKDIR/delivery_chef/Berksfile
+#  berks upload -b  $COOKBOOKDIR/delivery_supermarket/Berksfile
+#  berks upload -b  $COOKBOOKDIR/delivery_server/Berksfile
+#  berks upload -b  $COOKBOOKDIR/delivery_builder/Berksfile
+#  berks upload -b  $COOKBOOKDIR/delivery_build/Berksfile
+#  berks upload -b  $COOKBOOKDIR/delivery_push_jobs/Berksfile
+#  berks upload -b  $COOKBOOKDIR/demo/Berksfile
+#  # berks upload -b  $COOKBOOKDIR/pcb/Berksfile
+#  # ok no berksfile so try this instead.
+#  knife cookbook upload --cookbook-path ../../Delivery pcb
+#  berks upload -b  $COOKBOOKDIR/delivery-truck/Berksfile
+#  berks upload -b  $COOKBOOKDIR/delivery-base/Berksfile
+#  berks upload -b  $COOKBOOKDIR/delivery_build/Berksfile
+#  berks upload -b  $COOKBOOKDIR/delivery-sugar/Berksfile
+
+
+# Required once the chef server is up and running
+# knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery_server delivery_server
+# knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery_supermarket delivery_supermarket
+# knife cookbook upload --cookbook-path $COOKBOOKDIR/supermarket-omnibus-cookbook
+
+# for the moment, concentrate on building delivery only offline/without internet accesss
+# upload the build and builder cookbooks to chef server
+knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery_build delivery_build
+knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery_builder delivery_builder
+knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery_push_jobs delivery_push_jobs
+knife cookbook upload --cookbook-path $COOKBOOKDIR/push-jobs push-jobs
+knife cookbook upload --cookbook-path $COOKBOOKDIR/demo demo
+# need to modify these cookbooks if you want to install
+# without internet access
+knife cookbook upload --cookbook-path $COOKBOOKDIR/pcb pcb
+knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery-truck
+knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery-base
+knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery_build
+knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery-sugar
 
 # bootsttap builder1 node ( note you might prefer x3 of these nodes )
 knife bootstrap builder1.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "builder1.myorg.chefdemo.net" -E "delivery_nodes" -r 'recipe[delivery_builder::default]'
@@ -296,10 +320,10 @@ knife bootstrap union01.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "unio
 knife bootstrap rehearsal01.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "rehearsal01.myorg.chefdemo.net" -E "rehearsal" -r 'recipe[delivery_push_jobs::default],recipe[demo::default]'
 # similar for delivered
 knife bootstrap delivered01.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "delivered01.myorg.chefdemo.net" -E "delivered" -r 'recipe[delivery_push_jobs::default],recipe[demo::default]'
+echo 'knife node status command running, should return'
+echo 'the builder1 node and the 4 application nodes, AURD '
+echo 'if not debug as above on each node '
+knife node status
 
 # add a run_list
 #Create the org and the project in delivery server.
-
-# upload the build and builder cookbooks to chef server
-#knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery_build delivery_build
-#knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery_builder delivery_builder
