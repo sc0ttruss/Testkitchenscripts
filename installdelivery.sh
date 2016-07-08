@@ -103,16 +103,11 @@ kitchen list
 # kitchen converge
 # kitchen list
 echo "Looks like we are complete, now go follow the manual instructions"
-echo "need to login to supermarket as srv-delivery user,"
-echo "and accept the app shareing with supermarket "
 # Manual step, need to stop here
-echo 'Manual step 1.'
-sleep 360000
-# Login to supermarket as chef user srv-delivery, and press yes button
-# Authorization Required, Authorize supermarket to use your Chef account?
-echo "Please confirm you have done the above, continue Y/N?"
-
-
+echo 'Login to supermarket as chef user srv-delivery, and press yes button'
+echo 'Authorization Required, Authorize supermarket to use your Chef account?'
+echo "and accept the app shareing with supermarket "
+read -s -n 1 -p "Manual step 1. Do, above step, then Press any key to continue.."
 mkdir $COOKBOOKDIR/workspace
 cd $COOKBOOKDIR/workspace
 #cp -Ra $COOKBOOKDIR/delivery_workstation/ ./  ( delete this line, probably )
@@ -208,26 +203,26 @@ knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery-base
 knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery_build
 knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery-sugar
 
-# bootsttap builder1 node ( note you might prefer x3 of these nodes )
+echo 'bootsttap builder1 node ( note you might prefer x3 of these nodes )'
 knife bootstrap builder1.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "builder1.myorg.chefdemo.net" -E "delivery_nodes" -r 'recipe[delivery_builder::default]'
-echo 'Manual step 2.'
-sleep 36000
+echo 'before the next step, you might have to remove the "delivery server"'
+echo ' from your ~/.ssh/knownhosts file, if it already exists..'
 # Bootstrap the environment nodes
 # mote the acceptance environment has to exist for this bootstrap to work,
 # so do the following in delivery.
-# Login to the console, as 'admin' user here https://delivery.myorg.chefdemo.net
-# password is in the ~/chef-kits/chef/passwords.txt file ( from chef server )
-# add your public key to the delivery user
-# create one with `ssh-keygen -t rsa -b 4096 -C delivery@myorg.chefdemo.net -V +1024w1d`
-# next download the demo project from delviery and update it...from the dem directory above.
-# and select all the roles  admin, committer, reviewer, shipper, observer
-# logout and log back in again as delivery user
-# Login to the console, as 'delivery' user here https://delivery.myorg.chefdemo.net
-# password is in the ~/chef-kits/chef/deliverypassword.txt file ( from delivery server )
-# check out the diagram here https://www.lucidchart.com/documents/edit/0a0c86f4-abe9-47ba-8234-ba2db866023a
-# create an organisation called 'myorg', but DO NOT create the project 'demo'
-# https://delivery.myorg.chefdemo.net/e/myorg/#/organizations
-
+echo 'Login to the console, as "admin" user here https://delivery.myorg.chefdemo.net'
+echo 'password is in the ~/chef-kits/chef/passwords.txt file ( from chef server )'
+echo 'add your public key to the delivery user'
+echo 'and select all the roles  admin, committer, reviewer, shipper, observer'
+echo 'if needed, create keys with "ssh-keygen -t rsa -b 4096 -C delivery@myorg.chefdemo.net -V +1024w1d"'
+echo 'logout and log back in again as delivery user'
+echo 'Login to the console, as "srv-delivery" user here https://delivery.myorg.chefdemo.net'
+echo 'password is in the ~/chef-kits/chef/deliverypassword.txt file ( from delivery server )'
+echo 'just to validate the user and pasword are operational'
+echo 'check out the diagram here https://www.lucidchart.com/documents/edit/0a0c86f4-abe9-47ba-8234-ba2db866023a'
+echo 'create an organisation called 'myorg', but DO NOT create the project 'demo''
+echo 'https://delivery.myorg.chefdemo.net/e/myorg/#/organizations'
+read -s -n 1 -p "Manual step 2. Do, above steps, then Press any key to continue.."
 # accept the rsa key for identity of host on the workstation
 ssh -l srv-delivery@myorg -p 8989 delivery.myorg.chefdemo.net
 # think we have to run this twice, once to add, then once to connect
@@ -250,15 +245,16 @@ delivery setup --ent=myorg --org=myorg --user=srv-delivery --server=delivery.myo
 echo "# demo " >> README.md
 git add README.md
 git commit -m "Initial commit"
+echo 'note:  the next password is from your deliverypassword.txt'
+echo 'which is on the delivery server /etc/delvier/deliverypassword.txt'
+echo 'or locally in ~/chef-kits/chef, if you are running testkitchen'
 delivery token
-# note:  this is the password from your deliverypassword.txt file from
-# the deliery server
 # Run delivery init, which will create an empty build cookbook for
 # you (with an empty set of phase recipes), add the cookbook to your project,
 # create the new pipeline and submit the project to Delivery for review:
 delivery init
-echo 'manual step 3, go work the pipeline in the browser, then come back here.'
-sleep 360000
+echo 'manual step 3., go work the pipeline in the browser ( review and deliver buttons ), then come back here.'
+read -s -n 1 -p "4. Do, above steps, then Press any key to continue.."
 ##  old way, no longer supported
 ## delivery clone demo --ent=myorg --org=myorg --user=delivery --server=delivery.myorg.chefdemo.net
 ## cd demo
@@ -298,17 +294,19 @@ git status
 delivery review
 echo 'we did a delivery review above'
 echo 'if workers are idle try this debug on the builder1 node'
-echo 'login as dbuild user and try this'
+echo 'login as roo, and "su - dbuild" user and try this'
 echo 'knife job status'
 echo 'knife job start chef-client builder1.myorg.chefdemo.net'
 echo 'should kick off chef-client on builder1 and be successful'
-echo 'nife node status, should return this....'
+echo 'knife node status, should return this....'
 echo 'builder1.myorg.chefdemo.net	available'
-echo 'manual step 3, cannot boot strap till we add the envs, hence why .'
-sleep 36000
+echo 'manual step 4, cannot boot strap till we add the acceptance env, so'
+echo 'Press Review button in delivery gui, this will create the acceptance env'
+echo 'at the Deploy step of the Acceptance Phase'
+echo 'functional will fail...if so, press anykey as below to continue'
+read -s -n 1 -p "4. Do, above steps, then Press any key to continue.."
+echo 'we can add nodes and bootstrap the nodes, finally re-run Acceptance, Deliver once nodes bootstrapped...'
 cd $COOKBOOKDIR/workspace/demo
-# approve build in gui, then create the environments
-# functional will fail so we can bootstrap the node, now the env exists...
 # bootstrap the environment nodes
 knife bootstrap acceptance01.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "acceptance01.myorg.chefdemo.net" -E "acceptance-myorg-myorg-demo-master" -r 'recipe[delivery_push_jobs::default],recipe[demo::default]'
 # now re-run the acceptance phase and see if functional passes
@@ -321,9 +319,10 @@ knife bootstrap rehearsal01.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "
 # similar for delivered
 knife bootstrap delivered01.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "delivered01.myorg.chefdemo.net" -E "delivered" -r 'recipe[delivery_push_jobs::default],recipe[demo::default]'
 echo 'knife node status command running, should return'
-echo 'the builder1 node and the 4 application nodes, AURD '
+echo 'the builder1 node and the 4 application nodes, "AURD" '
 echo 'if not debug as above on each node '
 knife node status
+echo 'nodes added and bootstraped, finally re-run Acceptance, Press Deliver button, in the delivery gui'
 
 # add a run_list
 #Create the org and the project in delivery server.
