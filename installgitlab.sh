@@ -7,7 +7,7 @@
 # setup the default locations for the install
 # and the default OS
 #
-COOKBOOKDIR=$HOME/Source/Demos/Wip/Automate
+COOKBOOKDIR=$HOME/Source/Demos/Wip/Gitlab
 # destroy old instances that were lying around
 cd $COOKBOOKDIR
 echo "now in Automate directory"
@@ -18,10 +18,10 @@ mkdir -p $COOKBOOKDIR
 cd $COOKBOOKDIR
 ## mkdir -p  ~/chef-kits/chef
 cd  ~/chef-kits/chef
-wget -N https://packages.chef.io/stable/el/7/delivery-0.5.370-1.el7.x86_64.rpm
+wget -N https://packages.gitlab.com/gitlab/gitlab-ce/packages/el/7/gitlab-ce-8.12.7-ce.0.el7.x86_64.rpm/download
 cd $COOKBOOKDIR/
 # download the automate cookbook
-git clone https://github.com/sc0ttruss/automate.git
+git clone https://github.com/sc0ttruss/gitlab.git
 # check if running vmware_workstation or virtualbox,
 # virtualbox is assumed the default
 #
@@ -48,8 +48,8 @@ esac
 ## kitchen converge union01 &
 ## kitchen converge rehearsal01 &
 ## kitchen converge delivered01 &
-cd $COOKBOOKDIR/automate
-echo "now in automate directory"
+cd $COOKBOOKDIR/gitlab
+echo "now in gitlab directory"
 kitchen list
 kitchen converge
 kitchen list
