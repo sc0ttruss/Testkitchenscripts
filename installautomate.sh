@@ -18,7 +18,7 @@ mkdir -p $COOKBOOKDIR
 cd $COOKBOOKDIR
 mkdir -p  ~/chef-kits/chef
 cd  ~/chef-kits/chef
-wget -N https://packages.chef.io/stable/el/7/delivery-0.5.370-1.el7.x86_64.rpm
+wget -N https://packages.chef.io/stable/el/7/delivery-0.5.432-1.el7.x86_64.rpm
 cd $COOKBOOKDIR/
 # download the automate cookbook
 git clone https://github.com/sc0ttruss/automate.git
