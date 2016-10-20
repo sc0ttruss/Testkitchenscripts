@@ -13,10 +13,10 @@ cd $COOKBOOKDIR
 echo "now in Automate directory"
 kitchen destroy
 cd ../
-## rm -Rf $COOKBOOKDIR
+rm -Rf $COOKBOOKDIR
 mkdir -p $COOKBOOKDIR
 cd $COOKBOOKDIR
-## mkdir -p  ~/chef-kits/chef
+mkdir -p  ~/chef-kits/chef
 cd  ~/chef-kits/chef
 wget -N https://packages.chef.io/stable/el/7/delivery-0.5.370-1.el7.x86_64.rpm
 cd $COOKBOOKDIR/
