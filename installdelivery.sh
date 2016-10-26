@@ -34,6 +34,7 @@ wget -N https://packages.chef.io/stable/el/7/push-jobs-client-1.3.4-1.el7.x86_64
 wget -N https://packages.chef.io/stable/el/7/chefdk-0.19.6-1.el7.x86_64.rpm --no-check-certificate
 wget -N https://packages.chef.io/stable/el/7/delivery-0.5.432-1.el7.x86_64.rpm --no-check-certificate
 wget -N https://packages.chef.io/stable/el/7/chef-manage-2.4.3-1.el7.x86_64.rpm --no-check-certificate
+wget -N https://packages.chef.io/stable/el/7/chef-compliance-1.6.8-1.el7.x86_64.rpm --no-check-certificate
 # wget -N https://packages.chef.io/stable/el/7/chef-12.11.18-1.el7.x86_64.rpm --no-check-certificate
 # wget -N https://packagecloud.io/imeyer/runit/packages/el/7/runit-2.1.2-3.el7.centos.x86_64.rpm/download --no-check-certificate
 ## mv download runit-2.1.2-3.el7.centos.x86_64.rpm
