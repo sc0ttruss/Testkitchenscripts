@@ -14,10 +14,10 @@ echo "now in delivery_chef directory"
 kitchen destroy
 cd $COOKBOOKDIR/delivery_supermarket
 kitchen destroy
-cd $COOKBOOKDIR/delivery_server
+cd $COOKBOOKDIR/automate
 kitchen destroy
-cd $COOKBOOKDIR/delivery_builder
-kitchen destroy
+# cd $COOKBOOKDIR/delivery_builder
+# kitchen destroy
 cd $COOKBOOKDIR/delivery_push_jobs
 kitchen destroy
 cd ../../
@@ -27,24 +27,25 @@ cd $COOKBOOKDIR
 ## mkdir -p  ~/chef-kits/chef
 cd  ~/chef-kits/chef
 wget -N https://packages.chef.io/stable/el/6/opscode-push-jobs-server-1.1.6-1.x86_64.rpm --no-check-certificate
-wget -N https://packages.chef.io/stable/el/7/opscode-analytics-1.4.0-1.el7.x86_64.rpm --no-check-certificate
-wget -N https://packages.chef.io/stable/el/7/opscode-reporting-1.6.0-1.el7.x86_64.rpm --no-check-certificate
-wget -N https://packages.chef.io/stable/el/7/chef-server-core-12.7.0-1.el7.x86_64.rpm --no-check-certificate
+wget -N https://packages.chef.io/stable/el/7/opscode-analytics-1.5.0-1.el7.x86_64.rpm --no-check-certificate
+wget -N https://packages.chef.io/stable/el/7/opscode-reporting-1.6.4-1.el7.x86_64.rpm --no-check-certificate
+wget -N https://packages.chef.io/stable/el/7/chef-server-core-12.9.1-1.el7.x86_64.rpm --no-check-certificate
 wget -N https://packages.chef.io/stable/el/7/push-jobs-client-1.3.4-1.el7.x86_64.rpm --no-check-certificate
-wget -N https://packages.chef.io/stable/el/7/chefdk-0.15.15-1.el7.x86_64.rpm --no-check-certificate
-wget -N https://packages.chef.io/stable/el/7/delivery-0.4.522-1.el7.x86_64.rpm --no-check-certificate
-wget -N https://packages.chef.io/stable/el/7/opscode-reporting-1.6.0-1.el7.x86_64.rpm --no-check-certificate
-wget -N https://packages.chef.io/stable/el/7/chef-manage-2.4.0-1.el7.x  86_64.rpm --no-check-certificate
-wget -N https://packages.chef.io/stable/el/7/chef-12.11.18-1.el7.x86_64.rpm --no-check-certificate
-wget -N https://packagecloud.io/imeyer/runit/packages/el/7/runit-2.1.2-3.el7.centos.x86_64.rpm/download --no-check-certificate
+wget -N https://packages.chef.io/stable/el/7/chefdk-0.19.6-1.el7.x86_64.rpm --no-check-certificate
+wget -N https://packages.chef.io/stable/el/7/delivery-0.5.432-1.el7.x86_64.rpm --no-check-certificate
+wget -N https://packages.chef.io/stable/el/7/chef-manage-2.4.3-1.el7.x86_64.rpm --no-check-certificate
+# wget -N https://packages.chef.io/stable/el/7/chef-12.11.18-1.el7.x86_64.rpm --no-check-certificate
+# wget -N https://packagecloud.io/imeyer/runit/packages/el/7/runit-2.1.2-3.el7.centos.x86_64.rpm/download --no-check-certificate
 ## mv download runit-2.1.2-3.el7.centos.x86_64.rpm
 cd $COOKBOOKDIR/
 ## # download all the delivery repositories
 git clone https://github.com/sc0ttruss/delivery_push_jobs.git
 git clone https://github.com/sc0ttruss/delivery_builder.git
 git clone https://github.com/sc0ttruss/delivery_build.git
-git clone https://github.com/sc0ttruss/delivery_server.git
+#git clone https://github.com/sc0ttruss/delivery_server.git
+git clone https://github.com/sc0ttruss/automate.git
 git clone https://github.com/sc0ttruss/delivery_chef.git
+git clone https://github.com/sc0ttruss/delivery_compliance.git 
 git clone https://github.com/sc0ttruss/delivery_supermarket.git
 git clone https://github.com/sc0ttruss/delivery_workstation.git
 git clone https://github.com/sc0ttruss/push-jobs.git
@@ -89,14 +90,18 @@ cd $COOKBOOKDIR/delivery_supermarket
 kitchen list
 kitchen converge
 kitchen list
-cd $COOKBOOKDIR/delivery_server
+cd $COOKBOOKDIR/automate
 kitchen list
 kitchen converge
 kitchen list
-cd $COOKBOOKDIR/delivery_builder
+cd $COOKBOOKDIR/delivery_compliance
 kitchen list
 kitchen converge
 kitchen list
+# cd $COOKBOOKDIR/delivery_builder
+# kitchen list]k
+# kitchen converge
+# kitchen list
 # create the environment nodes at the end
 # cd $COOKBOOKDIR/delivery_push_jobs
 # kitchen list
@@ -135,11 +140,12 @@ knife upload environment ./environments/delivered.json
 # note you need to have added the certs to the local
 # workspace to make this successfull
 knife supermarket share -o $COOKBOOKDIR 'delivery_supermarket'
-knife supermarket share -o $COOKBOOKDIR 'delivery_server'
+knife supermarket share -o $COOKBOOKDIR 'automate'
 knife supermarket share -o $COOKBOOKDIR 'delivery_build'
-knife supermarket share -o $COOKBOOKDIR 'delivery_builder'
+# knife supermarket share -o $COOKBOOKDIR 'delivery_builder'
 knife supermarket share -o $COOKBOOKDIR 'delivery_push_jobs'
 knife supermarket share -o $COOKBOOKDIR 'delivery_chef'
+knife supermarket share -o $COOKBOOKDIR 'delivery_compliance'
 knife supermarket share -o $COOKBOOKDIR 'push-jobs'
 knife supermarket share -o $COOKBOOKDIR 'demo'
 knife supermarket share -o $COOKBOOKDIR 'pcb'
@@ -154,7 +160,7 @@ knife supermarket share -o $COOKBOOKDIR 'delivery-sugar'
 #  berks install -b  $COOKBOOKDIR/delivery_push_jobs/Berksfile
 #  berks install -b  $COOKBOOKDIR/delivery_chef/Berksfile
 #  berks install -b  $COOKBOOKDIR/delivery_supermarket/Berksfile
-#  berks install -b  $COOKBOOKDIR/delivery_server/Berksfile
+#  berks install -b  $COOKBOOKDIR/automate/Berksfile
 #  berks install -b  $COOKBOOKDIR/delivery_builder/Berksfile
 #  berks install -b  $COOKBOOKDIR/delivery_build/Berksfile
 #  berks install -b  $COOKBOOKDIR/delivery_push_jobs/Berksfile
@@ -169,7 +175,7 @@ knife supermarket share -o $COOKBOOKDIR 'delivery-sugar'
 #  berks upload -b  $COOKBOOKDIR/delivery_push_jobs/Berksfile
 #  berks upload -b  $COOKBOOKDIR/delivery_chef/Berksfile
 #  berks upload -b  $COOKBOOKDIR/delivery_supermarket/Berksfile
-#  berks upload -b  $COOKBOOKDIR/delivery_server/Berksfile
+#  berks upload -b  $COOKBOOKDIR/automate/Berksfile
 #  berks upload -b  $COOKBOOKDIR/delivery_builder/Berksfile
 #  berks upload -b  $COOKBOOKDIR/delivery_build/Berksfile
 #  berks upload -b  $COOKBOOKDIR/delivery_push_jobs/Berksfile
@@ -184,14 +190,14 @@ knife supermarket share -o $COOKBOOKDIR 'delivery-sugar'
 
 
 # Required once the chef server is up and running
-# knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery_server delivery_server
+# knife cookbook upload --cookbook-path $COOKBOOKDIR/automate automate
 # knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery_supermarket delivery_supermarket
 # knife cookbook upload --cookbook-path $COOKBOOKDIR/supermarket-omnibus-cookbook
 
 # for the moment, concentrate on building delivery only offline/without internet accesss
 # upload the build and builder cookbooks to chef server
 knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery_build delivery_build
-knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery_builder delivery_builder
+# knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery_builder delivery_builder
 knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery_push_jobs delivery_push_jobs
 knife cookbook upload --cookbook-path $COOKBOOKDIR/push-jobs push-jobs
 knife cookbook upload --cookbook-path $COOKBOOKDIR/demo demo
@@ -203,10 +209,10 @@ knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery-base
 knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery_build
 knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery-sugar
 
-echo 'bootsttap builder1 node ( note you might prefer x3 of these nodes )'
-knife bootstrap builder1.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "builder1.myorg.chefdemo.net" -E "delivery_nodes" -r 'recipe[delivery_builder::default]'
-echo 'before the next step, you might have to remove the "delivery server"'
-echo ' from your ~/.ssh/knownhosts file, if it already exists..'
+## echo 'bootsttap builder1 node ( note you might prefer x3 of these nodes )'
+## knife bootstrap builder1.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "builder1.myorg.chefdemo.net" -E "delivery_nodes" -r 'recipe[delivery_builder::default]'
+## echo 'before the next step, you might have to remove the "delivery server"'
+## echo ' from your ~/.ssh/knownhosts file, if it already exists..'
 # Bootstrap the environment nodes
 # mote the acceptance environment has to exist for this bootstrap to work,
 # so do the following in delivery.
