@@ -113,6 +113,9 @@ echo "Looks like we are complete, now go follow the manual instructions"
 echo 'Login to supermarket as chef user srv-delivery, and press yes button'
 echo 'Authorization Required, Authorize supermarket to use your Chef account?'
 echo "and accept the app shareing with supermarket "
+echo "login to chef server and run ( as root )the command between the "---" in the file
+echo "~/chef-kits/chef/compliancechefintegration.txt on the chef server, making
+echo "sure to save the output and run that command output on the automate server" 
 read -s -n 1 -p "Manual step 1. Do, above step, then Press any key to continue.."
 mkdir $COOKBOOKDIR/workspace
 cd $COOKBOOKDIR/workspace
