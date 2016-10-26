@@ -56,6 +56,7 @@ git clone https://github.com/chef-cookbooks/delivery-truck
 git clone https://github.com/chef-cookbooks/delivery-base
 git clone https://github.com/chef-cookbooks/delivery_build
 git clone https://github.com/chef-cookbooks/delivery-sugar
+git clone https://github.com/chef-cookbooks/audit.git
 # check if running vmware_workstation or virtualbox,
 # virtualbox is assumed the default
 #
@@ -159,6 +160,7 @@ knife supermarket share -o $COOKBOOKDIR 'delivery-truck'
 knife supermarket share -o $COOKBOOKDIR 'delivery-base'
 knife supermarket share -o $COOKBOOKDIR 'delivery_build'
 knife supermarket share -o $COOKBOOKDIR 'delivery-sugar'
+knife supermarket share -o $COOKBOOKDIR 'audit'
 # this secion commmented out as takes too many
 # boilerplate cookbooks that are not required for redhat
 # kept here as a reminder of what might be for other OS'S
@@ -213,6 +215,8 @@ knife cookbook upload --cookbook-path $COOKBOOKDIR/pcb pcb
 knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery-truck
 knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery-base
 knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery_build
+knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery-sugar
+# for compliance need to have the audit cookbook in chef server
 knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery-sugar
 
 ## echo 'bootsttap builder1 node ( note you might prefer x3 of these nodes )'
