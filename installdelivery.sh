@@ -46,7 +46,7 @@ git clone https://github.com/sc0ttruss/delivery_build.git
 #git clone https://github.com/sc0ttruss/delivery_server.git
 git clone https://github.com/sc0ttruss/automate.git
 git clone https://github.com/sc0ttruss/delivery_chef.git
-git clone https://github.com/sc0ttruss/delivery_compliance.git 
+git clone https://github.com/sc0ttruss/delivery_compliance.git
 git clone https://github.com/sc0ttruss/delivery_supermarket.git
 git clone https://github.com/sc0ttruss/delivery_workstation.git
 git clone https://github.com/sc0ttruss/push-jobs.git
@@ -100,10 +100,10 @@ cd $COOKBOOKDIR/delivery_compliance
 kitchen list
 kitchen converge
 kitchen list
-# cd $COOKBOOKDIR/delivery_builder
-# kitchen list]k
-# kitchen converge
-# kitchen list
+cd $COOKBOOKDIR/delivery_builder
+kitchen list]k
+kitchen converge
+kitchen list
 # create the environment nodes at the end
 # cd $COOKBOOKDIR/delivery_push_jobs
 # kitchen list
@@ -116,7 +116,7 @@ echo 'Authorization Required, Authorize supermarket to use your Chef account?'
 echo "and accept the app shareing with supermarket "
 echo "login to chef server and run ( as root )the command between the "---" in the file
 echo "~/chef-kits/chef/compliancechefintegration.txt on the chef server, making
-echo "sure to save the output and run that command output on the automate server" 
+echo "sure to save the output and run that command output on the automate server"
 echo "note: only nodes under management by Chef that successfully run `audit::default`
 echo "will show up in Chef Compliance"
 read -s -n 1 -p "Manual step 1. Do, above step, then Press any key to continue.."
@@ -217,7 +217,7 @@ knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery-base
 knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery_build
 knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery-sugar
 # for compliance need to have the audit cookbook in chef server
-knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery-sugar
+knife cookbook upload --cookbook-path $COOKBOOKDIR/audit
 
 ## echo 'bootsttap builder1 node ( note you might prefer x3 of these nodes )'
 ## knife bootstrap builder1.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "builder1.myorg.chefdemo.net" -E "delivery_nodes" -r 'recipe[delivery_builder::default]'
@@ -226,38 +226,38 @@ knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery-sugar
 # Bootstrap the environment nodes
 # mote the acceptance environment has to exist for this bootstrap to work,
 # so do the following in delivery.
-echo 'Login to the console, as "admin" user here https://delivery.myorg.chefdemo.net'
+echo 'Login to the console, as "admin" user here https://automate.myorg.chefdemo.net'
 echo 'password is in the ~/chef-kits/chef/passwords.txt file ( from chef server )'
 echo 'add your public key to the delivery user'
 echo 'and select all the roles  admin, committer, reviewer, shipper, observer'
-echo 'if needed, create keys with "ssh-keygen -t rsa -b 4096 -C delivery@myorg.chefdemo.net -V +1024w1d"'
+echo 'if needed, create keys with "ssh-keygen -t rsa -b 4096 -C automate@myorg.chefdemo.net -V +1024w1d"'
 echo 'logout and log back in again as delivery user'
-echo 'Login to the console, as "srv-delivery" user here https://delivery.myorg.chefdemo.net'
+echo 'Login to the console, as "srv-delivery" user here https://automate.myorg.chefdemo.net'
 echo 'password is in the ~/chef-kits/chef/deliverypassword.txt file ( from delivery server )'
 echo 'just to validate the user and pasword are operational'
 echo 'check out the diagram here https://www.lucidchart.com/documents/edit/0a0c86f4-abe9-47ba-8234-ba2db866023a'
 echo 'create an organisation called 'myorg', but DO NOT create the project 'demo''
-echo 'https://delivery.myorg.chefdemo.net/e/myorg/#/organizations'
+echo 'https://automate.myorg.chefdemo.net/e/myorg/#/organizations'
 read -s -n 1 -p "Manual step 2. Do, above steps, then Press any key to continue.."
 # accept the rsa key for identity of host on the workstation
-ssh -l srv-delivery@myorg -p 8989 delivery.myorg.chefdemo.net
+ssh -l srv-delivery@myorg -p 8989 automate.myorg.chefdemo.net
 # think we have to run this twice, once to add, then once to connect
-ssh -l srv-delivery@myorg -p 8989 delivery.myorg.chefdemo.net
+ssh -l srv-delivery@myorg -p 8989 automate.myorg.chefdemo.net
 # output should be similar to the following:-
-# The authenticity of host '[delivery.myorg.chefdemo.net]:8989 ([192.168.56.46]:8989)' can't be established.
+# The authenticity of host '[automate.myorg.chefdemo.net]:8989 ([192.168.56.46]:8989)' can't be established.
 # RSA key fingerprint is 64:b5:7e:df:dc:1e:45:80:b1:91:87:ad:f6:c3:db:99.
 # Are you sure you want to continue connecting (yes/no)? yes
-# Warning: Permanently added '[delivery.myorg.chefdemo.net]:8989,[192.168.56.46]:8989' (RSA) to the list of known hosts.
+# Warning: Permanently added '[automate.myorg.chefdemo.net]:8989,[192.168.56.46]:8989' (RSA) to the list of known hosts.
 # Connection closed by 192.168.56.46
-# scott@vertex:~/Vm/Source/Demos/Wip/Westpac/Delivery/delivery_workstation$ ssh -l delivery@myorg -p 8989 delivery.myorg.chefdemo.net
+# scott@vertex:~/Vm/Source/Demos/Wip/Westpac/Delivery/delivery_workstation$ ssh -l delivery@myorg -p 8989 automate.myorg.chefdemo.net
 # channel 0: protocol error: close rcvd twice
 # Hi delivery@myorg! You've successfully authenticated, but Chef Delivery does not provide shell access.
-#               Connection to delivery.myorg.chefdemo.net closed.
+#               Connection to automate.myorg.chefdemo.net closed.
 
 mkdir $COOKBOOKDIR/workspace/demo
 cd $COOKBOOKDIR/workspace/demo
 git init .
-delivery setup --ent=myorg --org=myorg --user=srv-delivery --server=delivery.myorg.chefdemo.net
+delivery setup --ent=myorg --org=myorg --user=srv-delivery --server=automate.myorg.chefdemo.net
 echo "# demo " >> README.md
 git add README.md
 git commit -m "Initial commit"
@@ -272,10 +272,10 @@ delivery init
 echo 'manual step 3., go work the pipeline in the browser ( review and deliver buttons ), then come back here.'
 read -s -n 1 -p "4. Do, above steps, then Press any key to continue.."
 ##  old way, no longer supported
-## delivery clone demo --ent=myorg --org=myorg --user=delivery --server=delivery.myorg.chefdemo.net
+## delivery clone demo --ent=myorg --org=myorg --user=delivery --server=automate.myorg.chefdemo.net
 ## cd demo
 ## # Create a project configuration file:
-## delivery setup --ent=myorg --org=myorg --user=delivery --server=delivery.myorg.chefdemo.net
+## delivery setup --ent=myorg --org=myorg --user=delivery --server=automate.myorg.chefdemo.net
 ## # Obtain a Delivery API token (you'll be prompted for your password here):
 ## vi readme
 ## git add .
