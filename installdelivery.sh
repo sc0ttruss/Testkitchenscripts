@@ -231,6 +231,7 @@ echo 'password is in the ~/chef-kits/chef/passwords.txt file ( from chef server 
 echo 'add your public key to the delivery user'
 echo 'and select all the roles  admin, committer, reviewer, shipper, observer'
 echo 'if needed, create keys with "ssh-keygen -t rsa -b 4096 -C automate@myorg.chefdemo.net -V +1024w1d"'
+echo 'add a new org called myorg or whatever you called your org'
 echo 'logout and log back in again as delivery user'
 echo 'Login to the console, as "srv-delivery" user here https://automate.myorg.chefdemo.net'
 echo 'password is in the ~/chef-kits/chef/deliverypassword.txt file ( from delivery server )'
