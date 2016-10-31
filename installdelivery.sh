@@ -57,6 +57,8 @@ git clone https://github.com/chef-cookbooks/delivery-truck
 git clone https://github.com/chef-cookbooks/delivery-base
 git clone https://github.com/chef-cookbooks/delivery_build
 git clone https://github.com/chef-cookbooks/delivery-sugar
+git clone https://github.com/chef-cookbooks/chef_handler.git 
+git clone https://github.com/chef-cookbooks/compat_resource.git
 git clone https://github.com/chef-cookbooks/audit.git
 # check if running vmware_workstation or virtualbox,
 # virtualbox is assumed the default
@@ -162,6 +164,8 @@ knife supermarket share -o $COOKBOOKDIR 'delivery-base'
 knife supermarket share -o $COOKBOOKDIR 'delivery_build'
 knife supermarket share -o $COOKBOOKDIR 'delivery-sugar'
 knife supermarket share -o $COOKBOOKDIR 'audit'
+knife supermarket share -o $COOKBOOKDIR 'compat_resource'
+knife supermarket share -o $COOKBOOKDIR 'chef_handler'
 # this secion commmented out as takes too many
 # boilerplate cookbooks that are not required for redhat
 # kept here as a reminder of what might be for other OS'S
@@ -205,21 +209,22 @@ knife supermarket share -o $COOKBOOKDIR 'audit'
 
 # for the moment, concentrate on building delivery only offline/without internet accesss
 # upload the build and builder cookbooks to chef server
-knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery_build delivery_build
+knife cookbook upload --cookbook-path $COOKBOOKDIR/ delivery_build
 # knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery_builder delivery_builder
-knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery_push_jobs delivery_push_jobs
-knife cookbook upload --cookbook-path $COOKBOOKDIR/push-jobs push-jobs
-knife cookbook upload --cookbook-path $COOKBOOKDIR/demo demo
+knife cookbook upload --cookbook-path $COOKBOOKDIR/ push-jobs
+knife cookbook upload --cookbook-path $COOKBOOKDIR/ delivery_push_jobs
+knife cookbook upload --cookbook-path $COOKBOOKDIR/ demo
 # need to modify these cookbooks if you want to install
 # without internet access
-knife cookbook upload --cookbook-path $COOKBOOKDIR/pcb pcb
-knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery-truck
-knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery-base
-knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery_build
-knife cookbook upload --cookbook-path $COOKBOOKDIR/delivery-sugar
+knife cookbook upload --cookbook-path $COOKBOOKDIR/ pcb
+knife cookbook upload --cookbook-path $COOKBOOKDIR/ delivery-base
+knife cookbook upload --cookbook-path $COOKBOOKDIR/ delivery_build
+knife cookbook upload --cookbook-path $COOKBOOKDIR/ delivery-sugar
+knife cookbook upload --cookbook-path $COOKBOOKDIR/ delivery-truck
 # for compliance need to have the audit cookbook in chef server
-knife cookbook upload --cookbook-path $COOKBOOKDIR/audit
-
+knife cookbook upload --cookbook-path $COOKBOOKDIR/ compat_resource
+knife cookbook upload --cookbook-path $COOKBOOKDIR/ chef_handler
+knife cookbook upload --cookbook-path $COOKBOOKDIR/ audit
 ## echo 'bootsttap builder1 node ( note you might prefer x3 of these nodes )'
 ## knife bootstrap builder1.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "builder1.myorg.chefdemo.net" -E "delivery_nodes" -r 'recipe[delivery_builder::default]'
 ## echo 'before the next step, you might have to remove the "delivery server"'
