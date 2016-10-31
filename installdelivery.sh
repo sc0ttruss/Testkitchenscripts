@@ -30,7 +30,8 @@ wget -N https://packages.chef.io/stable/el/6/opscode-push-jobs-server-1.1.6-1.x8
 wget -N https://packages.chef.io/stable/el/7/opscode-analytics-1.5.0-1.el7.x86_64.rpm --no-check-certificate
 wget -N https://packages.chef.io/stable/el/7/opscode-reporting-1.6.4-1.el7.x86_64.rpm --no-check-certificate
 wget -N https://packages.chef.io/stable/el/7/chef-server-core-12.9.1-1.el7.x86_64.rpm --no-check-certificate
-wget -N https://packages.chef.io/stable/el/7/push-jobs-client-1.3.4-1.el7.x86_64.rpm --no-check-certificate
+# wget -N https://packages.chef.io/stable/el/7/push-jobs-client-1.3.4-1.el7.x86_64.rpm --no-check-certificate
+wget -N https://packages.chef.io/stable/el/7/push-jobs-client-2.1.1-1.el7.x86_64.rpm --no-check-certificate
 wget -N https://packages.chef.io/stable/el/7/chefdk-0.19.6-1.el7.x86_64.rpm --no-check-certificate
 wget -N https://packages.chef.io/stable/el/7/delivery-0.5.432-1.el7.x86_64.rpm --no-check-certificate
 wget -N https://packages.chef.io/stable/el/7/chef-manage-2.4.3-1.el7.x86_64.rpm --no-check-certificate
@@ -317,6 +318,10 @@ echo 'knife job start chef-client builder1.myorg.chefdemo.net'
 echo 'should kick off chef-client on builder1 and be successful'
 echo 'knife node status, should return this....'
 echo 'builder1.myorg.chefdemo.net	available'
+echo 'if you are using 'srv-delivery' user must edit the following files on' 
+echo 'the build nodes and change the username accordingly'
+echo '/var/opt/delivery/workspace/.chef/knife.rb'
+echo '/var/opt/delivery/workspace/etc/delivery.rb'
 echo 'manual step 4, cannot boot strap till we add the acceptance env, so'
 echo 'Press Review button in delivery gui, this will create the acceptance env'
 echo 'at the Deploy step of the Acceptance Phase'
