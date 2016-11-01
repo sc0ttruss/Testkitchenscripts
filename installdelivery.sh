@@ -60,6 +60,7 @@ git clone https://github.com/chef-cookbooks/delivery-sugar
 git clone https://github.com/chef-cookbooks/chef_handler.git 
 git clone https://github.com/chef-cookbooks/compat_resource.git
 git clone https://github.com/chef-cookbooks/audit.git
+git clone https://github.com/chef-cookbooks/ntp.git
 # check if running vmware_workstation or virtualbox,
 # virtualbox is assumed the default
 #
@@ -225,6 +226,7 @@ knife cookbook upload --cookbook-path $COOKBOOKDIR/ delivery-truck
 knife cookbook upload --cookbook-path $COOKBOOKDIR/ compat_resource
 knife cookbook upload --cookbook-path $COOKBOOKDIR/ chef_handler
 knife cookbook upload --cookbook-path $COOKBOOKDIR/ audit
+knife cookbook upload --cookbook-path $COOKBOOKDIR/ ntp
 ## echo 'bootsttap builder1 node ( note you might prefer x3 of these nodes )'
 ## knife bootstrap builder1.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "builder1.myorg.chefdemo.net" -E "delivery_nodes" -r 'recipe[delivery_builder::default]'
 ## echo 'before the next step, you might have to remove the "delivery server"'
@@ -350,6 +352,19 @@ echo 'the builder1 node and the 4 application nodes, "AURD" '
 echo 'if not debug as above on each node '
 knife node status
 echo 'nodes added and bootstraped, finally re-run Acceptance, Press Deliver button, in the delivery gui'
-
+cd $COOKBOOKDIR/workspace/demo
+# make sure every server has ntp running and is synchronised.
+knife node run_list add "acceptance01.myorg.chefdemo.net" recipe['ntp::default']
+knife node run_list add "union01.myorg.chefdemo.net" recipe['ntp::default']
+knife node run_list add "rehearsal01.myorg.chefdemo.net" recipe['ntp::default']
+knife node run_list add "delivered01.myorg.chefdemo.net" recipe['ntp::default']
+knife bootstrap chef.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "chef.myorg.chefdemo.net" -r 'recipe[ntp::default]'
+knife bootstrap compliance.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "compliance.myorg.chefdemo.net" -r 'recipe[ntp::default]'
+knife bootstrap automate.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "automate.myorg.chefdemo.net" -r 'recipe[ntp::default]'
+knife bootstrap supermarket.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "supermaket.myorg.chefdemo.net" -r 'recipe[ntp::default]'
+knife bootstrap builder1.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "builder1.myorg.chefdemo.net" -r 'recipe[ntp::default]'
+knife node run_list add "builder1.myorg.chefdemo.net" recipe['ntp::default']
+# check time sync
+knife ssh -x vagrant '*:*' 'date; ntpstat' -P vagrant
 # add a run_list
 #Create the org and the project in delivery server.
