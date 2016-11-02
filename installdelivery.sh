@@ -96,12 +96,12 @@ cd $COOKBOOKDIR/delivery_supermarket
 kitchen list
 kitchen converge
 kitchen list
+cd $COOKBOOKDIR/delivery_builder
+kitchen list
+kitchen create
+kitchen list
 cd $COOKBOOKDIR/automate
 kitchen list
-kitchen converge
-kitchen list
-cd $COOKBOOKDIR/delivery_builder
-kitchen list]k
 kitchen converge
 kitchen list
 cd $COOKBOOKDIR/delivery_compliance
