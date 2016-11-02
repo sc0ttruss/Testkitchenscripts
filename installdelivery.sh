@@ -57,7 +57,7 @@ git clone https://github.com/chef-cookbooks/delivery-truck
 git clone https://github.com/chef-cookbooks/delivery-base
 git clone https://github.com/chef-cookbooks/delivery_build
 git clone https://github.com/chef-cookbooks/delivery-sugar
-git clone https://github.com/chef-cookbooks/chef_handler.git 
+git clone https://github.com/chef-cookbooks/chef_handler.git
 git clone https://github.com/chef-cookbooks/compat_resource.git
 git clone https://github.com/chef-cookbooks/audit.git
 git clone https://github.com/chef-cookbooks/ntp.git
@@ -146,6 +146,8 @@ knife upload environment ./environments/delivery_nodes.json
 knife upload environment ./environments/union.json
 knife upload environment ./environments/rehearsal.json
 knife upload environment ./environments/delivered.json
+# need to add a role for the audit cookbook to use
+knife role from file ./roles/audit.json
 #  Add the cookbooks to the local supermarket
 # server that you just built above
 # note you need to have added the certs to the local
@@ -325,7 +327,7 @@ echo 'knife job start chef-client builder1.myorg.chefdemo.net'
 echo 'should kick off chef-client on builder1 and be successful'
 echo 'knife node status, should return this....'
 echo 'builder1.myorg.chefdemo.net	available'
-echo 'if you are using 'srv-delivery' user must edit the following files on' 
+echo 'if you are using 'srv-delivery' user must edit the following files on'
 echo 'the build nodes and change the username accordingly'
 echo '/var/opt/delivery/workspace/.chef/knife.rb'
 echo '/var/opt/delivery/workspace/etc/delivery.rb'
@@ -366,5 +368,19 @@ knife bootstrap builder1.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "bui
 knife node run_list add "builder1.myorg.chefdemo.net" recipe['ntp::default']
 # check time sync
 knife ssh -x vagrant '*:*' 'date; ntpstat' -P vagrant
+cd $COOKBOOKDIR/workspace/demo
+# add the audit cookbok to every nodes run_list so as to generate data
+knife node run_list add "acceptance01.myorg.chefdemo.net" recipe['audit::default']
+knife node run_list add "union01.myorg.chefdemo.net" recipe['audit::default']
+knife node run_list add "rehearsal01.myorg.chefdemo.net" recipe['audit::default']
+knife node run_list add "delivered01.myorg.chefdemo.net" recipe['audit::default']
+knife node run_list add "chef.myorg.chefdemo.net" 'recipe[audit::default]'
+knife node run_list add "compliance.myorg.chefdemo.net" 'recipe[audit::default]'
+knife node run_list add "automate.myorg.chefdemo.net" 'recipe[audit::default]'
+knife node run_list add "supermaket.myorg.chefdemo.net" 'recipe[audit::default]'
+knife node run_list add "builder1.myorg.chefdemo.net" 'recipe[audit::default]'
+# now run the chef-client on every node to take the update above
+knife ssh -x vagrant 'name:*' 'sudo chef-client' -P vagrant
+
 # add a run_list
 #Create the org and the project in delivery server.
