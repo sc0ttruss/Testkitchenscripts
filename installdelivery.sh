@@ -100,12 +100,12 @@ cd $COOKBOOKDIR/automate
 kitchen list
 kitchen converge
 kitchen list
-cd $COOKBOOKDIR/delivery_compliance
-kitchen list
-kitchen converge
-kitchen list
 cd $COOKBOOKDIR/delivery_builder
 kitchen list]k
+kitchen converge
+kitchen list
+cd $COOKBOOKDIR/delivery_compliance
+kitchen list
 kitchen converge
 kitchen list
 # create the environment nodes at the end
@@ -119,7 +119,7 @@ echo 'Login to supermarket as chef user srv-delivery, and press yes button'
 echo 'Authorization Required, Authorize supermarket to use your Chef account?'
 echo "and accept the app shareing with supermarket "
 echo "login to chef server and run ( as root )the command between the "---" in the file
-echo "~/chef-kits/chef/compliancechefintegration.txt on the chef server, making
+echo "~/chef-kits/chef/compliancechefintegration.txt on the chef server, making"
 echo "sure to save the output and run that command output on the automate server"
 echo "note: only nodes under management by Chef that successfully run `audit::default`
 echo "will show up in Chef Compliance"
