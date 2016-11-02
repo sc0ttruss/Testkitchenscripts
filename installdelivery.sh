@@ -302,10 +302,10 @@ read -s -n 1 -p "4. Do, above steps, then Press any key to continue.."
 echo "now let's add some environments to the pipeline "
 cd $COOKBOOKDIR/delivery_push_jobs
 kitchen list
-kitchen converge acceptance01 &
-kitchen converge union01 &
-kitchen converge rehearsal01 &
-kitchen converge delivered01 &
+kitchen create acceptance01 &
+kitchen create union01 &
+kitchen create rehearsal01 &
+kitchen create delivered01 &
 # once a project has ran through once, do
 cd $COOKBOOKDIR/workspace/demo
 git pull --prune
