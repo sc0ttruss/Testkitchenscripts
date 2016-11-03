@@ -359,12 +359,11 @@ knife node run_list add "acceptance01.myorg.chefdemo.net" recipe['ntp::default']
 knife node run_list add "union01.myorg.chefdemo.net" recipe['ntp::default']
 knife node run_list add "rehearsal01.myorg.chefdemo.net" recipe['ntp::default']
 knife node run_list add "delivered01.myorg.chefdemo.net" recipe['ntp::default']
+knife node run_list add "builder1.myorg.chefdemo.net" recipe['ntp::default']
 knife bootstrap chef.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "chef.myorg.chefdemo.net" -r 'recipe[ntp::default]'
 knife bootstrap compliance.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "compliance.myorg.chefdemo.net" -r 'recipe[ntp::default]'
 knife bootstrap automate.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "automate.myorg.chefdemo.net" -r 'recipe[ntp::default]'
 knife bootstrap supermarket.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "supermaket.myorg.chefdemo.net" -r 'recipe[ntp::default]'
-knife bootstrap builder1.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "builder1.myorg.chefdemo.net" -r 'recipe[ntp::default]'
-knife node run_list add "builder1.myorg.chefdemo.net" recipe['ntp::default']
 # check time sync
 knife ssh -x vagrant '*:*' 'date; ntpstat' -P vagrant
 cd $COOKBOOKDIR/workspace/demo
