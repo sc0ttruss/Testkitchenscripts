@@ -61,6 +61,7 @@ git clone https://github.com/chef-cookbooks/chef_handler.git
 git clone https://github.com/chef-cookbooks/compat_resource.git
 git clone https://github.com/chef-cookbooks/audit.git
 git clone https://github.com/chef-cookbooks/ntp.git
+git clone https://github.com/chef-cookbooks/chef-client.git
 # check if running vmware_workstation or virtualbox,
 # virtualbox is assumed the default
 #
@@ -168,6 +169,7 @@ knife supermarket share -o $COOKBOOKDIR 'delivery-sugar'
 knife supermarket share -o $COOKBOOKDIR 'audit'
 knife supermarket share -o $COOKBOOKDIR 'compat_resource'
 knife supermarket share -o $COOKBOOKDIR 'chef_handler'
+knife supermarket share -o $COOKBOOKDIR 'chef-client'
 # this secion commmented out as takes too many
 # boilerplate cookbooks that are not required for redhat
 # kept here as a reminder of what might be for other OS'S
@@ -228,6 +230,7 @@ knife cookbook upload --cookbook-path $COOKBOOKDIR/ compat_resource
 knife cookbook upload --cookbook-path $COOKBOOKDIR/ chef_handler
 knife cookbook upload --cookbook-path $COOKBOOKDIR/ audit
 knife cookbook upload --cookbook-path $COOKBOOKDIR/ ntp
+knife cookbook upload --cookbook-path $COOKBOOKDIR/ chef-client
 ## echo 'bootsttap builder1 node ( note you might prefer x3 of these nodes )'
 ## knife bootstrap builder1.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "builder1.myorg.chefdemo.net" -E "delivery_nodes" -r 'recipe[delivery_builder::default]'
 ## echo 'before the next step, you might have to remove the "delivery server"'
@@ -368,17 +371,18 @@ knife bootstrap supermarket.myorg.chefdemo.net --sudo -x vagrant -P vagrant -N "
 knife ssh -x vagrant '*:*' 'date; ntpstat' -P vagrant
 cd $COOKBOOKDIR/workspace/demo
 # add the audit cookbok to every nodes run_list so as to generate data
-knife node run_list add "acceptance01.myorg.chefdemo.net" recipe['audit::default']
-knife node run_list add "union01.myorg.chefdemo.net" recipe['audit::default']
-knife node run_list add "rehearsal01.myorg.chefdemo.net" recipe['audit::default']
-knife node run_list add "delivered01.myorg.chefdemo.net" recipe['audit::default']
-knife node run_list add "chef.myorg.chefdemo.net" 'recipe[audit::default]'
-knife node run_list add "compliance.myorg.chefdemo.net" 'recipe[audit::default]'
-knife node run_list add "automate.myorg.chefdemo.net" 'recipe[audit::default]'
-knife node run_list add "supermaket.myorg.chefdemo.net" 'recipe[audit::default]'
-knife node run_list add "builder1.myorg.chefdemo.net" 'recipe[audit::default]'
+knife node run_list add "acceptance01.myorg.chefdemo.net" recipe['audit::default'],role['audit']
+knife node run_list add "union01.myorg.chefdemo.net" recipe['audit::default'],role['audit']
+knife node run_list add "rehearsal01.myorg.chefdemo.net" recipe['audit::default'],role['audit']
+knife node run_list add "delivered01.myorg.chefdemo.net" recipe['audit::default'],role['audit']
+knife node run_list add "chef.myorg.chefdemo.net" recipe[audit::default],role['audit']
+knife node run_list add "compliance.myorg.chefdemo.net" recipe[audit::default],role['audit']
+knife node run_list add "automate.myorg.chefdemo.net" recipe[audit::default],role['audit']
+knife node run_list add "supermaket.myorg.chefdemo.net" recipe[audit::default],role['audit']
+knife node run_list add "builder1.myorg.chefdemo.net" recipe[audit::default],role['audit']
 # now run the chef-client on every node to take the update above
 knife ssh -x vagrant 'name:*' 'sudo chef-client' -P vagrant
+# knife node run_list add "delivered01.myorg.chefdemo.net" role['chefclientrun']
 
 # add a run_list
 #Create the org and the project in delivery server.
