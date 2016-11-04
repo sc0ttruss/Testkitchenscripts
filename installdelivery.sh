@@ -121,7 +121,7 @@ echo 'Authorization Required, Authorize supermarket to use your Chef account?'
 echo "and accept the app shareing with supermarket "
 echo "login to chef server and run ( as root )the command between the '---' in the file"
 echo "~/chef-kits/chef/compliancechefintegration.txt, making"
-echo "sure to save the output and run that command output on the compliance server"
+echo "sure to save the output and run that command output ( last 2(ish) lines only ) on the compliance server"
 echo "note: only nodes under management by Chef that successfully run 'audit::default'"
 echo "will show up in Chef Compliance"
 read -s -n 1 -p "Manual step 1. Do, above step, then Press any key to continue.."
