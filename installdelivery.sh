@@ -384,5 +384,11 @@ knife node run_list add "builder1.myorg.chefdemo.net" recipe[audit::default],rol
 knife ssh -x vagrant 'name:*' 'sudo chef-client' -P vagrant
 # knife node run_list add "delivered01.myorg.chefdemo.net" role['chefclientrun']
 
+echo 'now login to compliance.myorg.chefdemo.net as user admin, pass chef '
+echo 'at bottem left, select manage organisation, then for myorg select edit'
+echo 'add a team "myteam" and add users admin and chef to the team'
+echo 'refresh the page and then at bottom left drop down select "myorg"'
+echo 'go to dashboard tab, you should witness a list of runs for compliance on all nodes'
+read -s -n 1 -p "4. Do, above steps, then Press any key to continue.."
 # add a run_list
 #Create the org and the project in delivery server.
