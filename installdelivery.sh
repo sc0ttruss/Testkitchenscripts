@@ -375,11 +375,11 @@ knife node run_list add "acceptance01.myorg.chefdemo.net" recipe['audit::default
 knife node run_list add "union01.myorg.chefdemo.net" recipe['audit::default'],role['audit']
 knife node run_list add "rehearsal01.myorg.chefdemo.net" recipe['audit::default'],role['audit']
 knife node run_list add "delivered01.myorg.chefdemo.net" recipe['audit::default'],role['audit']
-knife node run_list add "chef.myorg.chefdemo.net" recipe[audit::default],role['audit']
-knife node run_list add "compliance.myorg.chefdemo.net" recipe[audit::default],role['audit']
-knife node run_list add "automate.myorg.chefdemo.net" recipe[audit::default],role['audit']
-knife node run_list add "supermaket.myorg.chefdemo.net" recipe[audit::default],role['audit']
-knife node run_list add "builder1.myorg.chefdemo.net" recipe[audit::default],role['audit']
+knife node run_list add "chef.myorg.chefdemo.net" recipe['audit::default'],role['audit']
+knife node run_list add "compliance.myorg.chefdemo.net" recipe['audit::default'],role['audit']
+knife node run_list add "automate.myorg.chefdemo.net" recipe['audit::default'],role['audit']
+knife node run_list add "supermaket.myorg.chefdemo.net" recipe['audit::default'],role['audit']
+knife node run_list add "builder1.myorg.chefdemo.net" recipe['audit::default'],role['audit']
 # now run the chef-client on every node to take the update above
 knife ssh -x vagrant 'name:*' 'sudo chef-client' -P vagrant
 # knife node run_list add "delivered01.myorg.chefdemo.net" role['chefclientrun']
@@ -389,6 +389,33 @@ echo 'at bottem left, select manage organisation, then for myorg select edit'
 echo 'add a team "myteam" and add users admin and chef to the team'
 echo 'refresh the page and then at bottom left drop down select "myorg"'
 echo 'go to dashboard tab, you should witness a list of runs for compliance on all nodes'
-read -s -n 1 -p "4. Do, above steps, then Press any key to continue.."
+read -s -n 1 -p "5. Do, above steps, then Press any key to continue.."
+#  now add data collection
+# https://docs.chef.io/setup_visibility_chef_automate.html
+echo ' ensure each node has the automate self signed cert, if you are using a normal cert auth'
+echo ' this step is not required.' 
+knife ssh -x vagrant 'name:*' 'knife ssl fetch https://automate.myorg.chefdemo.net' -P vagrant
+knife ssh -x vagrant 'name:*' 'sudo cp /home/vagrant/.chef/trusted_certs/*.crt /etc/chef/trusted_certs/' -P vagrant
+knife ssh -x vagrant 'name:*' 'ls -al /etc/chef/trusted_certs' -P vagrant
+knife ssh -x vagrant 'name:*' 'sudo bash -c "echo data_collector.server_url \\\"https://automate.myorg.chefdemo.net/data-collector/v0/\\\" >> /etc/chef/client.rb"' -P vagrant
+knife ssh -x vagrant 'name:*' 'sudo bash -c "echo data_collector.token \\\"93a49a4f2482c64126f7b6015e6b0f30284287ee4054ff8807fb63d9cbd1c506\\\" >> /etc/chef/client.rb"' -P vagrant
+# now run the chef-client on every node to take the update above
+knife ssh -x vagrant 'name:*' 'sudo chef-client' -P vagrant
+echo 'finally we can decide whether we want to run chef-client every 90 secs, not recommeded'
+echo ' Ctrl+C to stop script, or press anykey'
+read -s -n 1 -p "6. Do, above steps, then Press any key to continue.."
+knife node run_list add "acceptance01.myorg.chefdemo.net" role['chefclientrun']
+knife node run_list add "union01.myorg.chefdemo.net" role['chefclientrun']
+knife node run_list add "rehearsal01.myorg.chefdemo.net" role['chefclientrun']
+knife node run_list add "delivered01.myorg.chefdemo.net" role['chefclientrun']
+knife node run_list add "chef.myorg.chefdemo.net" role['chefclientrun']
+knife node run_list add "compliance.myorg.chefdemo.net" role['chefclientrun']
+knife node run_list add "automate.myorg.chefdemo.net" role['chefclientrun']
+knife node run_list add "supermaket.myorg.chefdemo.net" role['chefclientrun']
+knife node run_list add "builder1.myorg.chefdemo.net" role['chefclientrun']
+# now run the chef-client on every node to take the update above
+knife ssh -x vagrant 'name:*' 'sudo chef-client' -P vagrant
+# to do
 # add a run_list
 #Create the org and the project in delivery server.
+
