@@ -8,6 +8,17 @@
 # and the default OS
 #
 COOKBOOKDIR=$HOME/Source/Demos/Wip/Westpac/Delivery
+################################
+# if you want to use LXD on ubuntu 
+# enable this environment variable to 
+# use the lxd yml config file for kitchen
+# this makes everything so much faster,
+# and uses less ram. Very useful if you 
+# are running on an old world machine like
+# a macbook pro with its limited ram
+
+# KITCHEN_YAML=.kitchen.lxd.yml
+
 # destroy old instances that were lying around
 cd $COOKBOOKDIR/delivery_chef
 echo "now in delivery_chef directory"
